@@ -6,16 +6,16 @@ import java.util.ArrayList;
  * Class with department data
  */
 public class Department {
-    // Team name
-    public String name;
+    // Department name
+    public DepartmentType name;
 
-    // List of team's players
+    // List of department's employees
     public ArrayList<Employee> employees;
-    // List of team's coaches
+    // List of department's managers
     public ArrayList<Manager> managers;
 
     // Constructor
-    public Department(String name) {
+    public Department(DepartmentType name) {
         // Set the name
         this.name = name;
 
@@ -24,7 +24,6 @@ public class Department {
         managers = new ArrayList<>();
     }
 
-
     /**
      * Set the way how convert objects of Department type to string
      *
@@ -32,6 +31,6 @@ public class Department {
      */
     @Override
     public String toString() {
-        return name;
+        return name.toString();
     }
 }
