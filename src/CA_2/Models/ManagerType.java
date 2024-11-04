@@ -6,49 +6,58 @@ package CA_2.Models;
 public enum ManagerType {
     HEAD_MANAGER,
     ASSISTANT_MANAGER,
-    TEAM_LEAD;
+    TEAM_LEAD,
+    MANAGER,
+    SENIOR_MANAGER;
 
     /**
-     * Set the way how convert enum to string
+     * Set the way to convert enum to a formatted string
      *
      * @return String value of enum
      */
-
     @Override
     public String toString() {
         switch (this) {
             case HEAD_MANAGER:
                 return "Head Manager";
             case ASSISTANT_MANAGER:
-                return "Assistant manager";
+                return "Assistant Manager";
             case TEAM_LEAD:
                 return "Team Lead";
+            case MANAGER:
+                return "Manager";
+            case SENIOR_MANAGER:
+                return "Senior Manager";
             default:
-                return "unknown";
+                return "Unknown";
         }
     }
 
     /**
-     * @param manager_type String value of ManagerType
+     * Parses a string to find the corresponding ManagerType enum
+     *
+     * @param managerType String value of ManagerType
      * @return ManagerType enum value
+     * @throws IllegalArgumentException if no match is found
      */
-    public static ManagerType parse(String manager_type) {
-        // if argument is equal "Head Manager" then return ManagerType.HEAD_MANAGER
-        if (manager_type.trim().equalsIgnoreCase("head manager")) {
+    public static ManagerType parse(String managerType) {
+        if (managerType.trim().equalsIgnoreCase("head manager")) {
             return ManagerType.HEAD_MANAGER;
         }
-
-        // if argument is equal "Assistant manager" then return ManagerType.ASSISTANT_MANAGER
-        if (manager_type.trim().equalsIgnoreCase("assistant manager")) {
+        if (managerType.trim().equalsIgnoreCase("assistant manager")) {
             return ManagerType.ASSISTANT_MANAGER;
         }
-
-        // if argument is equal "Team Lead" then return ManagerType.TEAM_LEAD
-        if (manager_type.trim().equalsIgnoreCase("team lead")) {
+        if (managerType.trim().equalsIgnoreCase("team lead")) {
             return ManagerType.TEAM_LEAD;
+        }
+        if (managerType.trim().equalsIgnoreCase("manager")) {
+            return ManagerType.MANAGER;
+        }
+        if (managerType.trim().equalsIgnoreCase("senior manager")) {
+            return ManagerType.SENIOR_MANAGER;
         }
 
         // If none of the conditions match, throw an exception
-        throw new IllegalArgumentException("Invalid manager type: " + manager_type);
+        throw new IllegalArgumentException("Invalid manager type: " + managerType);
     }
 }
