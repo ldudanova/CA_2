@@ -4,14 +4,14 @@ package CA_2.Models;
  * Enum with department type values
  */
 public enum DepartmentType {
-    CUSTOMER_SERVICE("customer service"),
-    TECHNICAL_SUPPORT("technical support"),
-    HUMAN_RESOURCES("hr"),
-    MARKETING("marketing"),
-    SALES("sales"),
-    FINANCE("finance"),
-    DEVELOPMENT("development"),
-    OPERATIONS("operations");
+    CUSTOMER_SERVICE("Customer Service"),
+    TECHNICAL_SUPPORT("Technical Support"),
+    HUMAN_RESOURCES("HR"),
+    MARKETING("Marketing"),
+    SALES("Sales"),
+    FINANCE("Finance"),
+    DEVELOPMENT("Development"),
+    OPERATIONS("Operations");
 
     // String representation of enum value
     private final String label;
