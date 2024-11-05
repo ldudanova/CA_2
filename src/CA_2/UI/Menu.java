@@ -219,10 +219,10 @@ public class Menu {
                             // Creating a new department object using the constructor
                             Department newDepartment = new Department(departmentName);
 
-                            // Adding the team to the store
+                            // Adding the department to the store
                             Store.departments.add(newDepartment);
                             //Print the result
-                            System.out.println("Team \"" + departmentName + "\" has been added");
+                            System.out.println("Department \"" + departmentName + "\" has been added");
 
                             break;
                         }
