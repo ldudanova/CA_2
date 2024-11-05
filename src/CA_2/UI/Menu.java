@@ -5,6 +5,7 @@ import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
 
 import static CA_2.Utils.InputUtilities.*;
+import static CA_2.Utils.InputUtilities.askUserForEmail;
 
 import java.util.ArrayList;
 
@@ -204,7 +205,7 @@ public class Menu {
                     switch (inputOption) {
                         // Creating employee
                         case EMPLOYEE: {
-//                            addEmployee();
+                            addEmployee();
                             break;
                         }
                         // Creating manager
@@ -242,5 +243,32 @@ public class Menu {
         } while (!needToExit);
     }
 
+    /**
+     * Method for input all data for creating an employee
+     */
+    private static void addEmployee() {
+        // Input first name
+        String firstName = askUserForWord("* Enter employee's first name:");
+        // Input last name
+        String lastName = askUserForWord("* Enter employee's last name:");
+        // Input email name
+        String email = askUserForEmail("Enter employee's email:");
 
+        // Input employee type
+        EmployeeType position = selectFromList("* Select employee's position", EmployeeType.class);
+
+        Department department = null;
+
+        // Select team if available else team is null
+        if (!Store.departments.isEmpty()) department = selectFromList("* Select the team:", Store.getDepartmentArray(), ((t) -> t.name));
+        else System.out.println("There is no any department stored! The field \"Department\" will be empty for the employee");
+
+        // Creating employee object
+        Employee newEmployee = new Employee(firstName, lastName, email, position, department);
+
+        // Adding new employee to the store
+        Store.people.add(newEmployee);
+
+        System.out.println("New employee has been added: " + newEmployee);
+    }
 }
