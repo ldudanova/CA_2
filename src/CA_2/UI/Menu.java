@@ -1,5 +1,13 @@
 package CA_2.UI;
 
+import CA_2.Models.*;
+import CA_2.Utils.SortAndSearchOperations;
+import CA_2.Utils.Store;
+
+import static CA_2.Utils.InputUtilities.*;
+
+import java.util.ArrayList;
+
 /**
  * Class for displaying a menu and asking the user for their choice.
  */
@@ -137,5 +145,48 @@ public class Menu {
             return label;
         }
     }
+
+    /**
+     * Method for starting a menu loop, asking for user input, and performing actions
+     */
+    public static void showMenu() {
+
+        // Flag to control the exit from the menu loop
+        boolean needToExit = false;
+
+        // Main menu loop that continues until 'needToExit' is set to true
+        do {
+            // Prompting the user to select an action from the main menu
+            menuOptions action = selectFromList("\n============ Main menu ===============\n", menuOptions.class);
+
+            // Evaluating the action selected by the user
+            switch (action) {
+
+                // If the "SORT" option is selected
+                case SORT:
+                    // Asking for sort direction
+                    sortingDirection sortingDirection =
+                            selectFromList("\nSelect order direction:", sortingDirection.class);
+
+                    // Create new sorted list of people
+                    ArrayList<Person> sortedPeople =
+                            SortAndSearchOperations.recursiveInsertionSort(Store.people, sortingDirection);
+
+                    // Print top 20 items of sorted list
+                    Printer.printPeople(sortedPeople, 20);
+
+                    break;
+
+                // If the "EXIT" option is selected, set the exit flag to true to terminate the menu loop
+                case EXIT: {
+                    needToExit = true;
+                    break;
+                }
+            }
+
+            // Repeat the loop as long as "needToExit" is false
+        } while (!needToExit);
+    }
+
 
 }
