@@ -57,4 +57,39 @@ public class SortAndSearchOperations {
 
         return new ArrayList<>(Arrays.asList(array));
     }
+
+    /**
+     * Method to perform a linear search on a list of people, looking for matches in first and/or last names.
+     *
+     * @param people        List of people to search through.
+     * @param searchPattern The text pattern to search for in each person's name.
+     * @return A list of people whose first name, last name, or full name matches the search pattern.
+     */
+    public static ArrayList<Person> linearSearchPeople(ArrayList<Person> people, String searchPattern) {
+
+        // Initialize an empty list to store matching results
+        ArrayList<Person> result = new ArrayList<>();
+
+        // Loop through each person in the provided list
+        for (Person person : people) {
+            // Check if the search pattern matches the person's first name (ignoring case)
+            if (person.firstName.equalsIgnoreCase(searchPattern)) {
+                // If it matches, add this person to the result list
+                result.add(person);
+            }
+            // Check if the search pattern matches the person's last name (ignoring case)
+            else if (person.lastName.equalsIgnoreCase(searchPattern)) {
+                // If it matches, add this person to the result list
+                result.add(person);
+            }
+            // Check if the search pattern matches the full name (first + " " + last) (ignoring case)
+            else if ((person.firstName + " " + person.lastName).equalsIgnoreCase(searchPattern)) {
+                // If it matches, add this person to the result list
+                result.add(person);
+            }
+        }
+
+        // Return the result list containing all matched people
+        return result;
+    }
 }

@@ -177,6 +177,24 @@ public class Menu {
 
                     break;
 
+                // If the "SEARCH" option is selected
+                case SEARCH: {
+                    // Asking the user for a search input (could be first name, last name, or both)
+                    String searchString = askUserForText("Enter first name, last name or both for searching: ");
+
+                    // Performing a linear search in the list of people based on the search input
+                    ArrayList<Person> searchResult = SortAndSearchOperations.linearSearchPeople(Store.people, searchString);
+
+                    // Checking if any results were found and displaying them; otherwise, notify no results were found
+                    if (searchResult.isEmpty()) System.out.println("No results were found for your request");
+                    else {
+                        System.out.println("Search result: ");
+                        Printer.printPeople(searchResult);
+                    }
+
+                    break;
+                }
+
                 // If the "EXIT" option is selected, set the exit flag to true to terminate the menu loop
                 case EXIT: {
                     needToExit = true;
