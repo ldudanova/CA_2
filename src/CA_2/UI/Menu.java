@@ -195,6 +195,42 @@ public class Menu {
                     break;
                 }
 
+                // Third option is selected
+                case USER_INPUT: {
+                    // Asking for type of object to create
+                    userInputOptions inputOption =
+                            selectFromList("What type of object do you want to add?", userInputOptions.class);
+
+                    switch (inputOption) {
+                        // Creating employee
+                        case EMPLOYEE: {
+//                            addEmployee();
+                            break;
+                        }
+                        // Creating manager
+                        case MANAGER: {
+//                            addManager();
+                            break;
+                        }
+                        // Creating department
+                        case DEPARTMENT: {
+                            // Asking for department name
+                            String departmentName = askUserForWord("Enter department's name:");
+                            // Creating a new department object using the constructor
+                            Department newDepartment = new Department(departmentName);
+
+                            // Adding the team to the store
+                            Store.departments.add(newDepartment);
+                            //Print the result
+                            System.out.println("Team \"" + departmentName + "\" has been added");
+
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+
                 // If the "EXIT" option is selected, set the exit flag to true to terminate the menu loop
                 case EXIT: {
                     needToExit = true;
