@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Department {
     // Department name
-    public DepartmentType name;
+    public String name;
 
     // List of department's employees
     public ArrayList<Employee> employees;
@@ -15,7 +15,7 @@ public class Department {
     public ArrayList<Manager> managers;
 
     // Constructor
-    public Department(DepartmentType name) {
+    public Department(String name) {
         // Set the name
         this.name = name;
 
@@ -31,6 +31,6 @@ public class Department {
      */
     @Override
     public String toString() {
-        return name.toString();
+        return name;
     }
 }
