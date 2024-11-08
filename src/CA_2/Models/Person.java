@@ -13,13 +13,19 @@ public class Person implements Comparable<Person> {
 
     // Variable for person's email
     public String email;
+    // Variable for person's gender
+    public Gender gender;
+
+    public byte age;
 
     // Constructor
-    public Person(String firstName, String lastName, String email) {
+    public Person(String firstName, String lastName, String email, Gender gender, byte age) {
         // Set fields
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.gender = gender;
+        this.age = age;
     }
 
     /**
@@ -30,7 +36,7 @@ public class Person implements Comparable<Person> {
     @Override
     public String toString() {
         return firstName + " " + lastName + " [" + this.getClass().getSimpleName() + "], " +
-                ((email != null && !email.isEmpty()) ? email : "no email");
+                ((email != null && !email.isEmpty()) ? email : "no email") + ", " + gender + age;
     }
 
     /**
