@@ -1,7 +1,8 @@
 package CA_2.Utils;
 
 // Importing the Department and Person classes from the Models package
-import CA_2.Models.Department;
+import CA_2.Models.Company;
+import CA_2.Models.DepartmentBase;
 import CA_2.Models.Person;
 
 // Importing ArrayList from java.util package for dynamic array functionality
@@ -15,12 +16,14 @@ import java.util.ArrayList;
  * instances, making the data accessible globally across the application.
  */
 public class Store {
+    //
+    public static ArrayList<Company> companies = new ArrayList<>();
 
     // Static ArrayList to store instances of Person, representing all employees and managers in memory
     public static ArrayList<Person> people = new ArrayList<>();
 
     // Static ArrayList to store instances of Department, representing all departments in memory
-    public static ArrayList<Department> departments = new ArrayList<>();
+    public static ArrayList<DepartmentBase> departments = new ArrayList<>();
 
     /**
      * Method to convert the ArrayList of departments into a standard array of Department objects.
@@ -29,9 +32,9 @@ public class Store {
      *
      * @return an array of Department objects representing all departments currently stored in the ArrayList
      */
-    public static Department[] getDepartmentArray() {
+    public static DepartmentBase[] getDepartmentArray() {
         // Initialize a new array of Department with the size of the departments list
-        Department[] array = new Department[departments.size()];
+        DepartmentBase[] array = new DepartmentBase[departments.size()];
 
         // Convert the departments ArrayList into an array and store it in 'array'
         array = departments.toArray(array);

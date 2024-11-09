@@ -3,9 +3,10 @@ package CA_2.Models;
 /**
  * Enum with employee type values
  */
-public enum EmployeeType {
-    FULL_TIME("full time"),
-    PART_TIME("part time"),
+public enum DeveloperType {
+    JUNIOR("junior"),
+    MIDDLE("middle"),
+    SENIOR("senior"),
     CONTRACT("contract"),
     INTERN("intern");
 
@@ -13,7 +14,7 @@ public enum EmployeeType {
     private final String label;
 
     // Constructor
-    EmployeeType(String label) {
+    DeveloperType(String label) {
         this.label = label;
     }
 

@@ -1,5 +1,6 @@
 package CA_2.UI;
 
+import CA_2.Models.Company;
 import CA_2.Models.Person;
 
 import java.util.ArrayList;
@@ -9,6 +10,23 @@ import java.util.ArrayList;
  * Class with static methods for printing different objects
  */
 public class Printer {
+    /**
+     *
+     */
+    public static void printCompanies(ArrayList<Company> companies) {
+        if (companies == null || companies.isEmpty()) {
+            // Print "No data" message if the list is empty
+            System.out.println("* There's no companies *");
+            // Exit the method, as there's nothing to print
+            return;
+        }
+        // Loop through each person in the list
+        for (int i = 0; i < companies.size(); i++) {
+            // Print each company’s information on a new line with a number
+            // (e.g., "1) Company details here")
+            System.out.println((i + 1) + ") " + companies.get(i).toString());
+        }
+    }
     /**
      * Method to print a list of people or their subclasses.
      *

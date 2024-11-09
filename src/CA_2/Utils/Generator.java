@@ -83,4 +83,48 @@ public class Generator {
                 generateUpperCaseString(3).toLowerCase() + "." + // 3 letters and dot
                 generateUpperCaseString(2).toLowerCase();       // 2 letters
     }
+
+    /**
+     * Method to choose random value of any Enum
+     *
+     * @param enumData type of enum that contains options
+     * @return Randomly selected value of Enum
+     */
+    public static <E extends Enum<E>> E pickFromList(Class<E> enumData) {
+        E[] enumConstants = enumData.getEnumConstants();
+        return enumConstants[rnd.nextInt(enumConstants.length)];
+    }
+
+    /**
+     * Method to choose random item from array
+     *
+     * @param array array of objects
+     * @param <E>   type of objects in the array
+     * @return Item from array
+     */
+    public static <E> E pickFromList(E[] array) {
+        return array[rnd.nextInt(array.length)];
+    }
+
+
+    // Array with company predicates for generating team names
+    private static final String[] companyPredicate = new String[]{"I", "IT", "Tech", "Group", "Web", "Dev", "Data", "Net"};
+    private static final String[] companySuffix = new String[]{"IT", "Tech", "Group", "Pro", "Max", "Technologies", "Hub", "Computing", "Development"};
+
+    /**
+     *
+     */
+    public static String generateCompanyName() {
+        Random random = new Random();
+        int number = random.nextInt(10); //
+        String name;
+
+        if (number % 2 == 0) {
+            name = companyPredicate[rnd.nextInt(companyPredicate.length)];
+            return name + "-" + generateUpperCaseString(3);
+        } else {
+            name = companySuffix[rnd.nextInt(companySuffix.length)];
+            return generateUpperCaseString(3) + "-" + name;
+        }
+    }
 }
