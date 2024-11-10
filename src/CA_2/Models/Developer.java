@@ -13,11 +13,11 @@ public class Developer extends Person {
     // Variable for employee position: value is one of EmployeeType enum values
     public DeveloperType position;
     // Variable for employee's department
-    public static DepartmentBase department;
+    public static Department department;
 
     // Constructor
     public Developer(String firstName, String lastName, String email, Gender gender,
-                     DeveloperType position, DepartmentBase department) {
+                     DeveloperType position, Department department) {
 
         // Call parent's constructor
         super(firstName, lastName, email, gender);
@@ -39,7 +39,14 @@ public class Developer extends Person {
     public String toString() {
         // Call parent's toString method and add player specific values
         return super.toString() + ", position: " + position
-                + "; Department: " + (department == null ? "not set" : department.name);
+                + "; Department: " + (department == null ? "not set" : department.getName());
+    }
+
+    /**
+     *
+     */
+    public void print(int index, String indent) {
+        System.out.println(indent + index+") " + super.toString() + ", " + position);
     }
 
     /**
@@ -61,7 +68,7 @@ public class Developer extends Person {
         DeveloperType position = Generator.pickFromList(DeveloperType.class);
 
         // Create variable for team
-        DepartmentBase departmnet = null;
+        Department departmnet = null;
 
         // If there is any teams in the system pick from them else it will be null
         if (!Store.departments.isEmpty())

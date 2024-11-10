@@ -1,6 +1,8 @@
 package CA_2.Utils;
 
 //import java utils
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
 
@@ -244,6 +246,9 @@ public class InputUtilities {
      * @param converter Function to convert each object in the array to a displayable string.
      * @return The selected item from the array.
      */
+
+
+
     public static <E> E selectFromList(String prompt, E[] array, Function<E, String> converter) {
         // Array to hold the string representations
         String[] values = new String[array.length];

@@ -3,22 +3,27 @@ package CA_2.Models;
 /**
  * Enum with department type values
  */
-public enum DepartmentType {
+public enum DepartmentDefaultType {
     CUSTOMER_SERVICE("Customer Service"),
     TECHNICAL_SUPPORT("Technical Support"),
     HUMAN_RESOURCES("HR"),
     MARKETING("Marketing"),
     SALES("Sales"),
     FINANCE("Finance"),
-    DEVELOPMENT("Development"),
+    ACCOUNTING("Accounting"),
+    IT("IT Development"),
     OPERATIONS("Operations");
 
     // String representation of enum value
     private final String label;
 
     // Constructor
-    DepartmentType(String label) {
+    private DepartmentDefaultType(String label) {
         this.label = label;
+    }
+
+    private DepartmentDefaultType() {
+        this.label = this.name();
     }
 
     /**

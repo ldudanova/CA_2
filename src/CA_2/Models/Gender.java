@@ -1,14 +1,18 @@
 package CA_2.Models;
 
-
 /**
  * Enum class representing gender values.
  *
- * The Gender enum is used to define the gender of employees within the company.
- * By establishing a standardized approach to represent gender, the company can ensure that
- * employee data is consistently formatted and supportive of inclusivity within the workplace.
- * This enum provides easy-to-use identifiers for specifying gender,
- * enhancing readability and reliability when managing employee data.
+ * The `Gender` enum is used to define gender identifiers for employees within the company.
+ * It establishes a standardized approach to represent gender, ensuring consistent formatting
+ * and supporting inclusivity across the program. This enum is designed for clarity and simplicity,
+ * with two primary options: "Male" and "Female," aligning with many workplace and regulatory standards
+ * commonly recognized in EU countries. This structure makes the program's gender field accessible
+ * and easily manageable for HR and administrative use, particularly in regions where clear binary
+ * gender options are typical for most company data frameworks.
+ *
+ * The program is adaptable, and other options could be added in the future if needed to support
+ * additional inclusivity and represent all employees appropriately.
  */
 public enum Gender {
     MALE,
@@ -17,10 +21,10 @@ public enum Gender {
     /**
      * Converts the enum value to a formatted string.
      *
-     * The overridden `toString()` method provides a custom way of converting enum values to a
-     * string. By using this method, the string representation of each enum value is formatted
-     * for easy readability, which can help improve user experience in the application and
-     * maintain consistency across various parts of the program that display employee information.
+     * The overridden `toString()` method provides a customized way of converting enum values to a
+     * human-readable string. This enhances the user experience, particularly when gender data
+     * is displayed in the application. Consistent and clear gender labels help in maintaining a
+     * professional tone throughout the program.
      *
      * @return String representation of the enum value
      */
@@ -31,28 +35,25 @@ public enum Gender {
                 return "Male";
             case FEMALE:
                 return "Female";
-
             default:
-                return "unknown";
+                return "Unknown";
         }
     }
 
-
     /**
-     * Parses a string and returns the corresponding Gender enum value.
+     * Parses a string input and returns the corresponding `Gender` enum value.
      *
-     * The `parse` method is a static method that takes a string as input and returns the appropriate
-     * Gender enum based on the string’s value. This method allows the program to convert string
-     * inputs, such as those provided by users or stored in text files, into standardized Gender
-     * enum values. By using this method, the program can handle gender inputs in a case-insensitive
-     * way, allowing flexibility in user input while maintaining data consistency.
+     * The `parse` method is a static helper that converts user-provided or file-stored string data
+     * into `Gender` enum values. By implementing case-insensitive comparison, it allows for flexible
+     * input while ensuring that gender data is consistently mapped to a valid enum value.
+     * This helps streamline user input processes, making the gender data management more intuitive.
      *
      * @param gender String value representing gender (e.g., "male" or "female")
      * @return The Gender enum corresponding to the input string. Defaults to FEMALE if the input
      *         does not match "male" (ignoring case).
      */
     public static Gender parse(String gender) {
-        // if argument is equal "male" then return Gender.MALE else Gender.FEMALE
+        // If input matches "male" (case-insensitive), return MALE; otherwise, default to FEMALE
         if (gender.trim().equalsIgnoreCase("male"))
             return Gender.MALE;
         else

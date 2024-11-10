@@ -13,7 +13,7 @@ public class Printer {
     /**
      *
      */
-    public static void printCompanies(ArrayList<Company> companies) {
+    public static void printCompanyNames(ArrayList<Company> companies) {
         if (companies == null || companies.isEmpty()) {
             // Print "No data" message if the list is empty
             System.out.println("* There's no companies *");
@@ -27,6 +27,26 @@ public class Printer {
             System.out.println((i + 1) + ") " + companies.get(i).toString());
         }
     }
+
+    /**
+     *
+     */
+    public static void printCompaniesData(ArrayList<Company> companies) {
+        if (companies == null || companies.isEmpty()) {
+            // Print "No data" message if the list is empty
+            System.out.println("* There's no companies *");
+            // Exit the method, as there's nothing to print
+            return;
+        }
+        System.out.println("Companies: ");
+        // Loop through each person in the list
+        for (int i = 0; i < companies.size(); i++) {
+            // Print each company’s information on a new line with a number
+            // (e.g., "1) Company details here")
+            companies.get(i).print(i+1, " ");
+        }
+    }
+
     /**
      * Method to print a list of people or their subclasses.
      *
