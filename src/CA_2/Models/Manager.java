@@ -10,22 +10,30 @@ import CA_2.Utils.Store;
 public class Manager extends Person {
     // Variable for manager type: value is one of ManagerType enum values
     public ManagerType managerType;
-    // Variable for manager's department
+    public double salary;
+    public String email;
+
+    // Variable for employee's department
     public Department department;
+
+//    private EmployeePosition position;
 
     // Constructor
     public Manager(String firstName,
                    String lastName,
                    String email,
                    Gender gender,
+                   double salary,
                    ManagerType managerType,
                    Department department) {
         // Call parent's constructor
-        super(firstName, lastName, email, gender);
+        super(firstName, lastName, gender);
 
         // Set fields values
         this.managerType = managerType;
         this.department = department;
+        this.salary = salary;
+        this.email = email;
     }
 
     /**
@@ -43,7 +51,17 @@ public class Manager extends Person {
      *
      */
     public void print(int index, String indent) {
-        System.out.println(indent + index+") " + super.toString() + ", " + managerType);
+        System.out.println(
+                indent
+                        + "  "
+                        + index
+                        + ") "
+                        + super.toString()
+                        + ", "
+                        + managerType
+                        + ", "
+                        + this.email
+        );
     }
 
     /**
@@ -63,6 +81,7 @@ public class Manager extends Person {
 
         // Randomly choose the manager type
         ManagerType managerType = Generator.pickFromList(ManagerType.class);
+        double salary = Generator.generateSalary(managerType, null);
 
         // Create variable for team
         Department department = null;
@@ -72,6 +91,12 @@ public class Manager extends Person {
             department = Generator.pickFromList(Store.getDepartmentArray());
 
         // Creating and returning Manager object
-        return new Manager(firstName, lastName, email, gender, managerType, department);
+        return new Manager(firstName,
+                lastName,
+                email,
+                gender,
+                salary,
+                managerType,
+                department);
     }
 }
