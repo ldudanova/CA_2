@@ -34,12 +34,25 @@ public abstract class Department {
             }
             System.out.println();
         }
+
+        //Print list of office employees
+        if (this.officeEmployees.isEmpty()) {
+            System.out.println(indent + "  Office employees: No office employees.");
+        } else {
+            System.out.println(indent + "  Office employees: ");
+            for (int i = 0; i < this.officeEmployees.size(); i++) {
+                OfficeEmployee officeEmployee = this.officeEmployees.get(i);
+                officeEmployee.print(i + 1, indent + "  ");
+            }
+            System.out.println();
+        }
     }
 
     // List of department's employees
     public ArrayList<Developer> developers = new ArrayList<>();
     // List of department's managers
     public ArrayList<Manager> managers = new ArrayList<>();
+    public ArrayList<OfficeEmployee> officeEmployees = new ArrayList<>();
 
     /**
      * Set the way how convert objects of Department type to string
@@ -50,5 +63,21 @@ public abstract class Department {
     @Override
     public String toString() {
         return getName() + (getType() == DepartmentBaseType.CUSTOM ? " (Custom)" : "");
+    }
+
+    public void addPerson(Person person) {
+        if (person instanceof Manager) {
+            this.managers.add((Manager) person);
+            return;
+        }
+        if (person instanceof Developer) {
+            this.developers.add((Developer) person);
+            return;
+        }
+        if (person instanceof OfficeEmployee) {
+            this.officeEmployees.add((OfficeEmployee) person);
+            return;
+        }
+        throw new RuntimeException("Unknown person type");
     }
 }

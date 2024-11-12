@@ -1,7 +1,7 @@
 package CA_2.UI;
 
 import CA_2.Models.*;
-import CA_2.Utils.CompanyHelper;
+import CA_2.Utils.Helper;
 import CA_2.Utils.Generator;
 import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
@@ -368,17 +368,17 @@ public class Menu {
                     switch (inputOption) {
                         // Creating developer
                         case DEVELOPER: {
-                            CompanyHelper.addDeveloper(selectedCompany);
+                            Helper.addDeveloper(selectedCompany);
                             break;
                         }
                         // Creating manager
                         case MANAGER: {
-                            CompanyHelper.addManager(selectedCompany);
+                            Helper.addManager(selectedCompany);
                             break;
                         }
                         // Creating department
                         case DEPARTMENT: {
-                            CompanyHelper.addDepartment(selectedCompany);
+                            Helper.addDepartment(selectedCompany);
                             break;
                         }
                     }

@@ -115,18 +115,23 @@ public class Reader {
 
                             currentDepartment = currentCompany.getOrCreateDepartment(departmentName);
 
+                            Person newPerson = Helper.buildPerson(
+                                    parts[0], // First name
+                                    parts[1], // Last name
+                                    Gender.parse(parts[2]), // Gender
+                                    parts[3], //Email
+                                    Double.parseDouble(parts[4]), //Salary
+                                    EmployeePosition.parse(parts[6]), //Position
+                                    parts[7], //Job title
+                                    currentDepartment //Department
+                            );
+
+                            currentDepartment.addPerson(newPerson);
+
                             // Creates a new Person object using the parsed data and adds it to the list.
                             // Each Person instance represents a specific individual, using their first name,
                             // last name, email, and gender as identifiers.
-                            people.add(new Employee(
-                                    parts[0], // First name
-                                    parts[1], // Last name
-                                    parts[3], //Email
-                                    Gender.parse(parts[2]), // Gender
-                                    Double.parseDouble(parts[4]), //Salary
-                                    EmployeePosition.parse(parts[6]), //Position
-                                    currentDepartment //Department
-                            ));
+                            people.add(newPerson);
 
                             // Sets the flag to true, indicating successful data processing.
                             // This flag allows the program to break out of the loop once data has been read.

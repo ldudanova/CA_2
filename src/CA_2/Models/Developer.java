@@ -40,7 +40,7 @@ public class Developer extends Employee {
      *
      */
     public void print(int index, String indent) {
-        System.out.println(indent + index+") " + super.toString() + ", " + developerType);
+        System.out.println("  "+indent + index+") " + super.toString() + ", " + developerType);
     }
 
     /**

@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static CA_2.Utils.InputUtilities.*;
 import static CA_2.Utils.InputUtilities.selectFromList;
 
-public class CompanyHelper {
+public class Helper {
     public static Department addDepartment(Company company) {
 
         int selectedValue = -1;
@@ -272,6 +272,78 @@ public class CompanyHelper {
         }
 
         return result;
+    }
+
+    public static Person buildPerson(String firstName,
+                                     String lastName,
+                                     Gender gender,
+                                     String email,
+                                     Double salary,
+                                     EmployeePosition position,
+                                     String jobTitle,
+                                     Department department
+    ) {
+        DeveloperType developerType = null;
+        ManagerType managerType = null;
+        String officeEmployeeTitle = null;
+
+        if (position != null) {
+            DeveloperType[] possibleDevTypes = DeveloperType.class.getEnumConstants();
+            boolean isDev = false;
+            for (DeveloperType devType : possibleDevTypes) {
+                if (devType.toString().equalsIgnoreCase(jobTitle.trim())) {
+                    developerType = devType;
+                    isDev = true;
+                    break;
+                }
+            }
+            if (!isDev) {
+                officeEmployeeTitle = jobTitle.trim();
+            }
+
+        } else {
+            ManagerType[] possibleManagerTypes = ManagerType.class.getEnumConstants();
+
+            for (ManagerType manType : possibleManagerTypes) {
+                if (manType.toString().equalsIgnoreCase(jobTitle.trim())) {
+                    managerType = manType;
+                }
+            }
+        }
+
+        if (managerType != null) {
+            return new Manager(firstName,
+                    lastName,
+                    email,
+                    gender,
+                    salary,
+                    managerType,
+                    department
+            );
+        }
+
+        if (developerType != null) {
+            return new Developer(firstName,
+                    lastName,
+                    email,
+                    gender,
+                    salary,
+                    position,
+                    developerType,
+                    department
+            );
+        }
+
+        return new OfficeEmployee(
+                firstName,
+                lastName,
+                email,
+                gender,
+                salary,
+                position,
+                officeEmployeeTitle,
+                department
+        );
     }
 
     private static Department getSelectedDepartmentToAddObj(Company company) {

@@ -31,7 +31,7 @@ public class OfficeEmployee extends Employee {
      *
      */
     public void print(int index, String indent) {
-        System.out.println(indent + index+") " + super.toString() + ", " + position);
+        System.out.println("  " + indent + index+") " + super.toString() + ", " + title);
     }
 
     /**

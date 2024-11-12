@@ -23,8 +23,8 @@ public class Employee extends Person  {
     public String toString() {
         return super.toString()
                 + ", email: " + (email == null ? "not set" : email)
-                + ", position: " + position
-                + "; Department: " + (department == null ? "not set" : department.getName()
-                + "; Salary: " + salary);
+                + ", Salary: " + salary
+                + ", " + position;
+
     }
 }
