@@ -175,6 +175,32 @@ public class Menu {
     }
 
     /**
+     *
+     */
+    public enum selectDepartmentToAddObjOptions {
+        EXISTING("the existing department"),
+        NEW("a new department");
+
+        // String label that holds the display name for each user input option.
+        private final String label;
+
+        // Constructor for selectDepartmentToAddObjOptions, which initializes the label with a human-readable string.
+        selectDepartmentToAddObjOptions(String label) {
+            this.label = label;
+        }
+
+        /**
+         * Converts the enum value to a string representation.
+         *
+         * @return The string label representing the user input option.
+         */
+        @Override
+        public String toString() {
+            return label;
+        }
+    }
+
+    /**
      * Enum representing types of objects that can be printed by the system.
      * This enum allows the user to specify a particular type of data to display.
      */
@@ -220,7 +246,9 @@ public class Menu {
         // Main menu loop that continues until 'needToExit' is set to true
         do {
             // Prompting the user to select an action from the main menu
-            menuOptions action = selectFromList("\n============ Main menu ===============\n", menuOptions.class);
+            menuOptions action =
+                    selectFromList("\n============ Main menu ===============\n",
+                            menuOptions.class);
 
             // Evaluating the action selected by the user
             switch (action) {
@@ -276,7 +304,9 @@ public class Menu {
                     if (Store.companies.isEmpty()) {
                         System.out.println("\nThere's no companies to add a new object.");
                         System.out.println("\nAdd a company first.");
-                        userWayToAddANewCompany selectedOption = selectFromList("Select the way to add a new company: ", userWayToAddANewCompany.class);
+                        userWayToAddANewCompany selectedOption =
+                                selectFromList("Select the way to add a new company: ",
+                                        userWayToAddANewCompany.class);
                         switch (selectedOption) {
                             case CUSTOM: {
                                 createCompany();
@@ -288,18 +318,19 @@ public class Menu {
                             }
                         }
                     }
-                    Company selectedCompany =  selectFromList("Select a company where to add a new object: ",
+                    Company selectedCompany = selectFromList("Select a company where to add a new object: ",
                             Store.companies.toArray(new Company[0]), Company::getName);
-                    System.out.println("selectedCompany: "+ selectedCompany.name);
+                    System.out.println("selectedCompany: " + selectedCompany.name);
 
                     // Asking for type of object to create
                     userInputOptions inputOption =
-                            selectFromList("What type of object do you want to add?", userInputOptions.class);
+                            selectFromList("What type of object do you want to add?",
+                                    userInputOptions.class);
 
                     switch (inputOption) {
                         // Creating developer
                         case DEVELOPER: {
-//                            CompanyHelper.addDeveloper(selectedCompany);
+                            CompanyHelper.addDeveloper(selectedCompany);
                             break;
                         }
                         // Creating manager
@@ -400,99 +431,6 @@ public class Menu {
             // Repeat the loop as long as "needToExit" is false
         } while (!needToExit);
     }
-
-    /**
-     * Method for input all data for creating an employee
-     */
-//    private static void addDeveloper() {
-//        // Input first name
-//        String firstName = askUserForWord("* Enter developer's first name:");
-//        // Input last name
-//        String lastName = askUserForWord("* Enter developer's last name:");
-//        // Input gender
-//        Gender gender = selectFromList("* Select the gender:  (* - required)", Gender.class);
-//        // Input email
-//        String email = askUserForEmail("Enter developer's email:");
-//
-//        // Input developer type
-//        DeveloperType position = selectFromList("* Select developer's position", DeveloperType.class);
-//
-//        DepartmentBase department = null;
-//
-//        // Select department if available else department is null
-//        if (!Store.departments.isEmpty()) {
-//            department = selectFromList("* Select the department:", Store.getDepartmentArray(), ((t) -> String.valueOf(t.name)));
-//        } else {
-//            System.out.println("There is no any department stored! The field \"Department\" will be empty for the employee");
-//        }
-//
-//        // Creating developer object
-//        Developer newDeveloper = new Developer(firstName, lastName, email, gender, position, department);
-//
-//        // Adding new developer to the store
-//        Store.people.add(newDeveloper);
-//
-//        //Print the result message
-//        System.out.println("New developer has been added: " + newDeveloper);
-//    }
-
-    /**
-     * Method for input all data for creating a manager
-     */
-/*    private static void addManager() {
-        // Input first name
-        String firstName = askUserForWord("* Enter manager's first name:");
-        // Input last name
-        String lastName = askUserForWord("* Enter manager's last name:");
-        // Input gender
-        Gender gender = selectFromList("* Select the gender:  (* - required)", Gender.class);
-        // Input email name
-        String email = askUserForEmail("Enter manager's email:");
-
-        // Select manager type
-        ManagerType managerType = selectFromList("* Select manager's type", ManagerType.class);
-
-        DepartmentBase department = null;
-
-        // Select department if available else department is null
-        if (!Store.departments.isEmpty()) {
-            department =
-                    selectFromList("* Select the department:",
-                            Store.getDepartmentArray(),
-                            ((t) -> String.valueOf(t.name)));
-        } else {
-            System.out.println("There is no any department stored! The field \"Department\" will be empty for the manager");
-        }
-
-        // Creating manager object
-        Manager manager = new Manager(firstName, lastName, email, gender, managerType, department);
-
-        // Adding new manager to the store
-        Store.people.add(manager);
-
-        //Print the result message
-        System.out.println("Manager has been added: " + manager);
-    }*/
-
-    /**
-     * Method for add department
-     */
-//    private static void addDepartment(Company company) {
-//        // Select department type
-//        DepartmentDefaultType departmentType =
-//                selectFromList("* Select department's type",
-//                        DepartmentDefaultType.class);
-//
-//        DepartmentBase department = new DepartmentBase(departmentType);
-//
-//        // Adding new department to the store
-//        Store.departments.add(department);
-//
-//        company.departments.add(department);
-//
-//        //Print the result message
-//        System.out.println("Department has been added: " + department);
-//    }
 
     private static void createCompany() {
         String companyName = askUserForText("\nEnter the name for your company: ");
