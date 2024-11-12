@@ -1,14 +1,14 @@
 package CA_2.Models;
 
-/**
- * Enum with employee type values
- */
 public enum DeveloperType {
-    JUNIOR("junior"),
-    MIDDLE("middle"),
-    SENIOR("senior"),
-    CONTRACT("contract"),
-    INTERN("intern");
+    FRONTEND("Frontend"),
+    BACKEND("Backend"),
+    FULL_STACK("Full-stack"),
+    QA("QA"),
+    MOBILE("Mobile Developer"),
+    AI("AI"),
+    DATA_SCIENTIST("Data Scientist"),
+    DEVOPS("DevOps");
 
     // String representation of enum value
     private final String label;
@@ -28,4 +28,3 @@ public enum DeveloperType {
         return label;
     }
 }
-
