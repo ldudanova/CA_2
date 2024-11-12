@@ -1,6 +1,7 @@
 package CA_2.Utils;
 
 import CA_2.Models.*;
+import CA_2.UI.Menu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -108,7 +109,7 @@ public class CompanyHelper {
         return result;
     }
 
-    public static void printCompany(Company company) {
+/*    public static void printCompany(Company company) {
 
         System.out.println("\n========= Printing the company ===========");
 
@@ -125,47 +126,14 @@ public class CompanyHelper {
         }
 
         System.out.println("============= End of print ===============\n");
-    }
+    }*/
 
     /**
      * Method for input all data for creating a manager
      */
-    public static Manager addManager(Company company) {
-        Scanner scanner = new Scanner(System.in);
+    public static void addManager(Company company) {
         //Select department to add a new manager
-        Department selectedDepartment = null;
-
-        System.out.println("Would you like to add a new manager to:");
-        System.out.println("  1) the existing department");
-        System.out.println("  2) a new department");
-
-        int choice;
-
-        do {
-            while (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Enter 1 or 2.");
-                scanner.next();
-            }
-            choice = scanner.nextInt();
-        } while (choice != 1 && choice != 2);
-
-        scanner.nextLine();
-
-        if (choice == 1) {
-            List<Department> departments = company.departments;
-            if (departments.isEmpty()) {
-                System.out.println("There's no existing departments. Create a new department");
-                choice = 2;
-            } else {
-                selectedDepartment =
-                        InputUtilities.selectFromList("\nSelect a department from the list: ",
-                                company.departments.toArray(new Department[0]), Department::getName);
-            }
-        }
-
-        if (choice == 2) {
-            selectedDepartment = addDepartment(company);
-        }
+        Department selectedDepartment = getSelectedDepartmentToAddObj(company);
 
         List<ManagerType> availableManagerTypes = getAvailableManagerTypes(selectedDepartment);
 
@@ -182,13 +150,14 @@ public class CompanyHelper {
                 String lastName = askUserForWord("* Enter manager's last name:");
                 // Input gender
                 Gender gender = selectFromList("* Select the gender:  (* - required)", Gender.class);
-                // Input email name
+                // Input email
                 String email = askUserForEmail("Enter manager's email:");
-                Manager newManager = new Manager(firstName, lastName, email, gender, managerType, selectedDepartment);
+                double salary = askUserForDouble("Enter manager's salary:");
+                Manager newManager = new Manager(firstName, lastName, email, gender, salary, managerType, selectedDepartment);
                 selectedDepartment.managers.add(newManager);
                 System.out.println("Manager \"" + managerType + "\" has been added to the department " + selectedDepartment.getName());
 
-                return newManager;
+                return;
             }
 
             System.err.println("Manager \"" + managerType + "\" already exists");
@@ -221,5 +190,111 @@ public class CompanyHelper {
         }
 
         return result;
+    }
+
+
+    /**
+     * Method for input all data for creating a developer
+     */
+    public static Developer addDeveloper(Company company) {
+        //Select department to add a new developer
+        Department selectedDepartment = getSelectedDepartmentToAddObj(company);
+
+        DeveloperType developerType = selectFromList("* Select developer's type", DeveloperType.class);
+
+        List<EmployeePosition> availableEmployeePositions = getAvailableEmployeePositions(selectedDepartment);
+
+        // Select employee position
+        EmployeePosition developerPosition = selectFromList("* Select developer's position",
+                availableEmployeePositions.toArray(new EmployeePosition[0]),
+                EmployeePosition::toString);
+
+        do {
+            if (canAddDeveloper(selectedDepartment, developerPosition)) {
+                // Input first name
+                String firstName = askUserForWord("* Enter developer's first name:");
+                // Input last name
+                String lastName = askUserForWord("* Enter developer's last name:");
+                // Input gender
+                Gender gender = selectFromList("* Select the gender:  (* - required)", Gender.class);
+                // Input email name
+                String email = askUserForEmail("Enter developer's email:");
+                double salary = askUserForDouble("Enter developer's salary:");
+                Developer newDeveloper = new Developer(
+                        firstName,
+                        lastName,
+                        email,
+                        gender,
+                        salary,
+                        developerPosition,
+                        developerType,
+                        selectedDepartment);
+                selectedDepartment.developers.add(newDeveloper);
+                System.out.println(
+                        "Developer \n"
+                                + newDeveloper
+                                + "\n has been added to the department "
+                                + selectedDepartment.getName()
+                );
+
+                return newDeveloper;
+            }
+
+            System.err.println(
+                    "Developer \""
+                            + developerPosition
+                            + "\" already exists"
+            );
+            System.err.println("try again");
+
+        } while (true);
+    }
+
+    public static boolean canAddDeveloper(Department department, EmployeePosition newEmployeePosition) {
+        for (Developer developer : department.developers) {
+            if (developer.position.equals(newEmployeePosition)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static List<EmployeePosition> getAvailableEmployeePositions(Department department) {
+        ArrayList<EmployeePosition> result = new ArrayList<>(Arrays.asList(EmployeePosition.values()));
+
+        for (Developer developer : department.developers) {
+            for (EmployeePosition ep : EmployeePosition.values()) {
+                if (developer.position == ep) {
+                    result.remove((developer).position);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private static Department getSelectedDepartmentToAddObj(Company company) {
+        Menu.selectDepartmentToAddObjOptions choice =
+                InputUtilities.selectFromList("Would you like to add a new developer to:",
+                        Menu.selectDepartmentToAddObjOptions.class);
+
+        switch (choice) {
+            case EXISTING: {
+                List<Department> departments = company.departments;
+
+                if (departments.isEmpty()) {
+                    System.out.println("There's no existing departments. Create a new department");
+                    return addDepartment(company);
+                } else {
+                    return InputUtilities.selectFromList("\nSelect a department from the list: ",
+                            company.departments.toArray(new Department[0]), Department::getName);
+                }
+            }
+            case NEW:
+            default: {
+                return addDepartment(company);
+            }
+        }
     }
 }
