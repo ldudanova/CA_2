@@ -129,7 +129,7 @@ public class Company {
             System.out.println(indent + "  Departments: ");
             for (int i = 0; i < this.departments.size(); i++) {
                 Department department = this.departments.get(i);
-                department.print(i + 1, indent + "  ");
+                department.print(i + 1, indent + "    ");
             }
         }
     }
