@@ -1,6 +1,7 @@
 package CA_2.Utils;
 
 //import java utils
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -87,6 +88,7 @@ public class InputUtilities {
 
         // Variable to store user input
         String userInput;
+
         // Boolean flag for input validity
         boolean isValid;
 
@@ -100,8 +102,8 @@ public class InputUtilities {
 
             if (userInput.isEmpty()) {
                 System.out.println("* email is empty *");
-                // Return an empty string if input is empty
-                return "";
+                // Return
+                return "no email";
             }
 
             if (userInput.contains(" ")) {
@@ -169,11 +171,44 @@ public class InputUtilities {
         return num;
     }
 
+    public static double askUserForDouble(String prompt) {
+        Scanner scanner;
+        boolean hasDouble;
+        double num = 0;
+
+        do {
+            // Display the prompt message
+            System.out.println(prompt);
+            // Create a new Scanner object for each attempt
+            scanner = new Scanner(System.in);
+            // Check if input is an integer
+            hasDouble = scanner.hasNextDouble();
+
+            if (!hasDouble) {
+                System.out.println("Your input can not be used as a salary. " +
+                        "It must be a number. " +
+                        "Example: 100.00." +
+                        " Try again.");
+            } else {
+                // Read the double input
+                num = scanner.nextInt();
+
+                if (num < 0) {
+                    System.out.println("Your number should be greater than " + 0 + ". Try again");
+                }
+            }
+
+        } while (!hasDouble || num < 0); // Repeat until a valid double is entered
+
+        return num;
+
+    }
+
     /**
      * Display a list of options for the user to select from,
      * then prompt them to enter a valid option.
      * If the selection is invalid, display an error and re-prompt.
-     *
+     * <p>
      * This method is used to present a simple list of String options to the user.
      * It directly displays the options in the String array,
      * which are passed in as a variable-length argument list.
@@ -206,7 +241,7 @@ public class InputUtilities {
     /**
      * Display a list of options derived from an Enum class for the user to select from.
      * If the selection is invalid, display an error and re-prompt.
-     *
+     * <p>
      * This method is specifically designed to work with enums.
      * It converts each enum constant into a string for display and lets the user select one.
      * The method returns the chosen enum constant itself rather than an index,
@@ -233,7 +268,7 @@ public class InputUtilities {
     /**
      * Display a list of options derived from an array of objects. Prompt the user to select an item.
      * If the selection is invalid, display an error and re-prompt.
-     *
+     * <p>
      * This method is used to have a more complex object array
      * and to display specific attributes of each object (not just String values).
      * The Function<E, String> converter allows to customize the string representation for each item in the array.
@@ -246,7 +281,6 @@ public class InputUtilities {
      * @param converter Function to convert each object in the array to a displayable string.
      * @return The selected item from the array.
      */
-
 
 
     public static <E> E selectFromList(String prompt, E[] array, Function<E, String> converter) {
