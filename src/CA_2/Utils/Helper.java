@@ -153,7 +153,7 @@ public class Helper {
                 // Input email
                 String email = askUserForEmail("Enter manager's email:");
                 double salary = askUserForDouble("Enter manager's salary:");
-                Manager newManager = new Manager(firstName, lastName, email, gender, salary, managerType, selectedDepartment);
+                Manager newManager = new Manager(firstName, lastName, email, gender, salary, managerType);
                 selectedDepartment.managers.add(newManager);
                 System.out.println("Manager \"" + managerType + "\" has been added to the department " + selectedDepartment.getName());
 
@@ -227,8 +227,7 @@ public class Helper {
                         gender,
                         salary,
                         developerPosition,
-                        developerType,
-                        selectedDepartment);
+                        developerType);
                 selectedDepartment.developers.add(newDeveloper);
                 System.out.println(
                         "Developer \n"
@@ -280,8 +279,7 @@ public class Helper {
                                      String email,
                                      Double salary,
                                      EmployeePosition position,
-                                     String jobTitle,
-                                     Department department
+                                     String jobTitle
     ) {
         DeveloperType developerType = null;
         ManagerType managerType = null;
@@ -317,8 +315,7 @@ public class Helper {
                     email,
                     gender,
                     salary,
-                    managerType,
-                    department
+                    managerType
             );
         }
 
@@ -329,8 +326,7 @@ public class Helper {
                     gender,
                     salary,
                     position,
-                    developerType,
-                    department
+                    developerType
             );
         }
 
@@ -341,8 +337,7 @@ public class Helper {
                 gender,
                 salary,
                 position,
-                officeEmployeeTitle,
-                department
+                officeEmployeeTitle
         );
     }
 

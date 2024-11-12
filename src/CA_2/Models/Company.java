@@ -83,6 +83,7 @@ public class Company {
         // Calls an external utility to generate a unique, random company name.
         String name = Generator.generateCompanyName();
 
+
         return new Company(name); // Returns a new Company object initialized with the generated name.
     }
 

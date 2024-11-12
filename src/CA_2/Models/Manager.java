@@ -13,23 +13,18 @@ public class Manager extends Person {
     public double salary;
     public String email;
 
-    // Variable for employee's department
-    public Department department;
-
     // Constructor
     public Manager(String firstName,
                    String lastName,
                    String email,
                    Gender gender,
                    double salary,
-                   ManagerType managerType,
-                   Department department) {
+                   ManagerType managerType) {
         // Call parent's constructor
         super(firstName, lastName, gender);
 
         // Set fields values
         this.managerType = managerType;
-        this.department = department;
         this.salary = salary;
         this.email = email;
     }
@@ -41,8 +36,7 @@ public class Manager extends Person {
      */
     @Override
     public String toString() {
-        return super.toString() + ", " + managerType
-                + "; Department: " + (department == null ? "not set" : department.getName());
+        return super.toString() + ", " + managerType;
     }
 
     /**
@@ -94,7 +88,6 @@ public class Manager extends Person {
                 email,
                 gender,
                 salary,
-                managerType,
-                department);
+                managerType);
     }
 }

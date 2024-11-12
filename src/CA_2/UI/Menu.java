@@ -7,7 +7,9 @@ import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import static CA_2.Utils.Helper.canAddDepartment;
 import static CA_2.Utils.InputUtilities.*;
 
 /**
@@ -351,7 +353,7 @@ public class Menu {
                                 break;
                             }
                             case GENERATE: {
-                                generateCompany();
+                                Store.companies.add(Company.generate());
                                 break;
                             }
                         }
@@ -396,18 +398,37 @@ public class Menu {
                         case DEVELOPER: {
                             Developer developer = Developer.generate();
                             Store.people.add(developer);
-                            System.out.println("Developer has been added: " + developer);
+                            Company randomCompany;
+                            if (Store.companies.isEmpty()) {
+                                Store.companies.add(Company.generate());
+                            }
+                            randomCompany = Store.companies.get(new Random().nextInt(Store.companies.size()));
+                            Department itDep = randomCompany.getOrCreateDepartment(DepartmentDefaultType.IT.toString());
+                            itDep.addPerson(developer);
+                            System.out.println("Developer " + developer + "has been added to " + randomCompany.getName());
                             break;
                         }
                         // Generating manager
                         case MANAGER: {
                             Manager manager = Manager.generate();
                             Store.people.add(manager);
-                            System.out.println("Manager has been added: " + manager);
+                            Company randomCompany;
+                            Department randomDep;
+                            if (Store.companies.isEmpty()) {
+                                Store.companies.add(Company.generate());
+                            }
+                            randomCompany = Store.companies.get(new Random().nextInt(Store.companies.size()));
+                            randomDep = randomCompany.departments.get(new Random().nextInt(randomCompany.departments.size()));
+
+//                            Department itDep = randomCompany.getOrCreateDepartment(randomDep.getName());
+                            randomDep.addPerson(manager);
+                            System.out.println("Manager " + manager + "has been added to " + randomCompany.getName());
                             break;
                         }
                         case COMPANY: {
-                            generateCompany();
+                            Company newCompany = Company.generate();
+                            Store.companies.add(newCompany);
+                            System.out.println("The company has been added: " + newCompany.name);
                             break;
                         }
                     }
@@ -471,15 +492,8 @@ public class Menu {
     }
 
     private static void createCompany(String companyName) {
-//        String companyName = askUserForText("\nEnter the name for your company: ");
         Company company = new Company(companyName);
         Store.companies.add(company);
         System.out.println("The company " + company.name + " was created");
-    }
-
-    private static void generateCompany() {
-        Company newCompany = Company.generate();
-        Store.companies.add(newCompany);
-        System.out.println("The company has been added: " + newCompany.name);
     }
 }

@@ -122,8 +122,7 @@ public class Reader {
                                     parts[3], //Email
                                     Double.parseDouble(parts[4]), //Salary
                                     EmployeePosition.parse(parts[6]), //Position
-                                    parts[7], //Job title
-                                    currentDepartment //Department
+                                    parts[7] //Job title
                             );
 
                             currentDepartment.addPerson(newPerson);

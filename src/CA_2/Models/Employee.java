@@ -5,17 +5,13 @@ public class Employee extends Person  {
     public double salary;
     public String email;
 
-    // Variable for employee's department
-    public Department department;
-
     //Constructor
     public Employee(String firstName, String lastName, String email, Gender gender,
-                    double salary, EmployeePosition position, Department department) {
+                    double salary, EmployeePosition position) {
         // Call parent's constructor
         super(firstName, lastName, gender);
         this.email = email;
         this.salary = salary;
-        this.department = department;
         this.position = position;
     }
 

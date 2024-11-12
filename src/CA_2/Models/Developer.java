@@ -15,10 +15,10 @@ public class Developer extends Employee {
 
     // Constructor
     public Developer(String firstName, String lastName, String email, Gender gender, double salary,
-                     EmployeePosition position, DeveloperType developerType, Department department) {
+                     EmployeePosition position, DeveloperType developerType) {
 
         // Call parent's constructor
-        super(firstName, lastName, email, gender, salary, position, department);
+        super(firstName, lastName, email, gender, salary, position);
         // Set fields values
         this.developerType = developerType;
     }
@@ -31,8 +31,6 @@ public class Developer extends Employee {
     @Override
     public String toString() {
         // Call parent's toString method and add player specific values
-/*        return super.toString() + ", position: " + position
-                + "; Department: " + (department == null ? "not set" : department.getName() + "; Salary: " + salary);*/
         return super.toString() + "; Type: " + developerType;
     }
 
@@ -73,6 +71,6 @@ public class Developer extends Employee {
         }
 
         // Creating and returning Developer object
-        return new Developer(firstName, lastName, email, gender, salary, position, developerType, department);
+        return new Developer(firstName, lastName, email, gender, salary, position, developerType);
     }
 }

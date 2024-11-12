@@ -8,9 +8,9 @@ public class OfficeEmployee extends Employee {
 
     //Constructor
     public OfficeEmployee(String firstName, String lastName, String email, Gender gender, double salary,
-                          EmployeePosition position, String title, Department department) {
+                          EmployeePosition position, String title) {
         // Call parent's constructor
-        super(firstName, lastName, email, gender, salary, position, department);
+        super(firstName, lastName, email, gender, salary, position);
         // Set fields values
         this.title = title;
     }
@@ -23,8 +23,7 @@ public class OfficeEmployee extends Employee {
     @Override
     public String toString() {
         // Call parent's toString method and add player specific values
-        return super.toString() + ", position: " + position
-                + "; Department: " + (department == null ? "not set" : department.getName());
+        return super.toString() + ", position: " + position;
     }
 
     /**
@@ -64,6 +63,6 @@ public class OfficeEmployee extends Employee {
             department = Generator.pickFromList(Store.getDepartmentArray());
 
         // Creating and returning Developer object
-        return new OfficeEmployee(firstName, lastName, email, gender, salary, position, title, department);
+        return new OfficeEmployee(firstName, lastName, email, gender, salary, position, title);
     }
 }
