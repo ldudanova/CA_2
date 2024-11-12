@@ -8,26 +8,19 @@ import CA_2.Utils.Store;
  * Inherited from Person class
  */
 
-public class Developer extends Person {
+public class Developer extends Employee {
 
     // Variable for employee position: value is one of EmployeeType enum values
-    public DeveloperType position;
-    // Variable for employee's department
-    public static Department department;
+    public DeveloperType developerType;
 
     // Constructor
-    public Developer(String firstName, String lastName, String email, Gender gender,
-                     DeveloperType position, Department department) {
+    public Developer(String firstName, String lastName, String email, Gender gender, double salary,
+                     EmployeePosition position, DeveloperType developerType, Department department) {
 
         // Call parent's constructor
-        super(firstName, lastName, email, gender);
+        super(firstName, lastName, email, gender, salary, position, department);
         // Set fields values
-        this.position = position;
-        this.department = department;
-
-        // if there is a department then add this employee to the department as an employee
-        if (department != null)
-            department.developers.add(this);
+        this.developerType = developerType;
     }
 
     /**
@@ -38,15 +31,16 @@ public class Developer extends Person {
     @Override
     public String toString() {
         // Call parent's toString method and add player specific values
-        return super.toString() + ", position: " + position
-                + "; Department: " + (department == null ? "not set" : department.getName());
+/*        return super.toString() + ", position: " + position
+                + "; Department: " + (department == null ? "not set" : department.getName() + "; Salary: " + salary);*/
+        return super.toString() + "; Type: " + developerType;
     }
 
     /**
      *
      */
     public void print(int index, String indent) {
-        System.out.println(indent + index+") " + super.toString() + ", " + position);
+        System.out.println(indent + index+") " + super.toString() + ", " + developerType);
     }
 
     /**
@@ -63,18 +57,22 @@ public class Developer extends Person {
         String lastName = Generator.getLastName();
         // Generate an email based on first and last names
         String email = Generator.generateEmail(firstName, lastName);
-
+        //Generate developer type
+        DeveloperType developerType = Generator.pickFromList(DeveloperType.class);
         // Randomly choose the player position
-        DeveloperType position = Generator.pickFromList(DeveloperType.class);
+        EmployeePosition position = Generator.pickFromList(EmployeePosition.class);
+        //Generate salary
+        double salary = Generator.generateSalary(null, position);
 
         // Create variable for team
         Department departmnet = null;
 
         // If there is any teams in the system pick from them else it will be null
-        if (!Store.departments.isEmpty())
+        if (!Store.departments.isEmpty()) {
             departmnet = Generator.pickFromList(Store.getDepartmentArray());
+        }
 
         // Creating and returning Developer object
-        return new Developer(firstName, lastName, email, gender, position, department);
+        return new Developer(firstName, lastName, email, gender, salary, position, developerType, departmnet);
     }
 }
