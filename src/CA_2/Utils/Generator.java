@@ -21,7 +21,10 @@ public class Generator {
     public static String getFirstName(Gender gender) {
         try {
             // Filtering list of people with certain gender and saving them to array
-            Person[] array = Store.people.stream().filter(x -> x.gender == gender).toArray(Person[]::new);
+            Person[] array = Store.people
+                    .stream()
+                    .filter(x -> x.gender == gender)
+                    .toArray(Person[]::new);
             // Getting random item from the filtered list and taking first name of it
             return array[rnd.nextInt(array.length)].firstName;
         } catch (Exception e) {
@@ -46,7 +49,6 @@ public class Generator {
     }
 
     /**
-     *
      * @param length
      * @return
      */
@@ -110,13 +112,13 @@ public class Generator {
         return array[rnd.nextInt(array.length)];
     }
 
-
     // Array with company predicates for generating team names
-    private static final String[] companyPredicate = new String[]{"I", "IT", "Tech", "Group", "Web", "Dev", "Data", "Net"};
-    private static final String[] companySuffix = new String[]{"IT", "Tech", "Group", "Pro", "Max", "Technologies", "Hub", "Computing", "Development"};
+    private static final String[] companyPredicate =
+            new String[]{"I", "IT", "Tech", "Group", "Web", "Dev", "Data", "Net"};
+    private static final String[] companySuffix =
+            new String[]{"IT", "Tech", "Group", "Pro", "Max", "Technologies", "Hub", "Computing", "Development"};
 
     /**
-     *
      * @return
      */
     public static String generateCompanyName() {
@@ -134,7 +136,6 @@ public class Generator {
     }
 
     /**
-     *
      * @param managerType
      * @param position
      * @return
@@ -149,7 +150,6 @@ public class Generator {
     }
 
     /**
-     *
      * @param managerType
      * @return
      */
@@ -177,7 +177,6 @@ public class Generator {
     }
 
     /**
-     *
      * @param position
      * @return
      */
@@ -205,7 +204,6 @@ public class Generator {
     }
 
     /**
-     *
      * @param min
      * @param max
      * @return

@@ -2,6 +2,7 @@ package CA_2.UI;
 
 import CA_2.Models.*;
 import CA_2.Utils.CompanyHelper;
+import CA_2.Utils.Generator;
 import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
 
@@ -200,6 +201,29 @@ public class Menu {
         }
     }
 
+    public enum selectWayToCreateNewCompanyOptions {
+        INPUT("Input a name for a new company"),
+        GENERATE("Generate a name for a new company");
+
+        // String label that holds the display name for each user input option.
+        private final String label;
+
+        // Constructor for selectDepartmentToAddObjOptions, which initializes the label with a human-readable string.
+        selectWayToCreateNewCompanyOptions(String label) {
+            this.label = label;
+        }
+
+        /**
+         * Converts the enum value to a string representation.
+         *
+         * @return The string label representing the user input option.
+         */
+        @Override
+        public String toString() {
+            return label;
+        }
+    }
+
     /**
      * Enum representing types of objects that can be printed by the system.
      * This enum allows the user to specify a particular type of data to display.
@@ -253,7 +277,20 @@ public class Menu {
             // Evaluating the action selected by the user
             switch (action) {
                 case CREATE_COMPANY: {
-                    createCompany();
+                    selectWayToCreateNewCompanyOptions selectWayToCreateNewCompanyOption =
+                            selectFromList("\nSelect the way to create a name for a new company: ",
+                                    selectWayToCreateNewCompanyOptions.class);
+                    switch (selectWayToCreateNewCompanyOption) {
+                        case INPUT: {
+                            String companyName =
+                                    askUserForText("\nEnter the name for your company: ");
+                            createCompany(companyName);
+                            break;
+                        }
+                        case GENERATE: {
+                            createCompany(Generator.generateCompanyName());
+                        }
+                    }
                     break;
                 }
 
@@ -309,7 +346,9 @@ public class Menu {
                                         userWayToAddANewCompany.class);
                         switch (selectedOption) {
                             case CUSTOM: {
-                                createCompany();
+                                String companyName =
+                                        askUserForText("\nEnter the name for your company: ");
+                                createCompany(companyName);
                                 break;
                             }
                             case GENERATE: {
@@ -432,8 +471,8 @@ public class Menu {
         } while (!needToExit);
     }
 
-    private static void createCompany() {
-        String companyName = askUserForText("\nEnter the name for your company: ");
+    private static void createCompany(String companyName) {
+//        String companyName = askUserForText("\nEnter the name for your company: ");
         Company company = new Company(companyName);
         Store.companies.add(company);
         System.out.println("The company " + company.name + " was created");

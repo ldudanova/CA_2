@@ -6,7 +6,7 @@ public enum DeveloperType {
     FULL_STACK("Full-stack"),
     QA("QA"),
     MOBILE("Mobile Developer"),
-    AI("AI"),
+    AI("AI Developer"),
     DATA_SCIENTIST("Data Scientist"),
     DEVOPS("DevOps");
 

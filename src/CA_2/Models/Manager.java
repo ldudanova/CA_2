@@ -16,8 +16,6 @@ public class Manager extends Person {
     // Variable for employee's department
     public Department department;
 
-//    private EmployeePosition position;
-
     // Constructor
     public Manager(String firstName,
                    String lastName,
