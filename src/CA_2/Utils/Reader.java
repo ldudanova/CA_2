@@ -1,7 +1,6 @@
 package CA_2.Utils;
 
-import CA_2.Models.Gender;
-import CA_2.Models.Person;
+import CA_2.Models.*;
 
 // Importing necessary libraries
 import java.io.FileReader;
@@ -12,7 +11,7 @@ public class Reader {
 
     /**
      * Reads data from a specified file and returns a list of `Person` objects.
-     *
+     * <p>
      * The `readFile` method prompts the user for a file name and reads data from that file to create
      * an `ArrayList` of `Person` objects. This method is designed to provide a structured way of
      * importing employee or applicant data, which is especially useful for companies looking to
@@ -20,21 +19,21 @@ public class Reader {
      * in this class, the program achieves a single point of data input, making future updates to file
      * handling simpler and more efficient. Additionally, it ensures that data is read, parsed, and
      * formatted consistently, which is critical for maintaining data integrity across the application.
-     *
+     * <p>
      * Use Cases:
      * - **HR Staff**: This method can be valuable for HR staff or administrative users who need to
-     *   import a list of applicants or employees from external sources. For example, after a recruitment
-     *   drive, data from applicants could be saved to a text file and then uploaded to the system
-     *   without manual data entry.
+     * import a list of applicants or employees from external sources. For example, after a recruitment
+     * drive, data from applicants could be saved to a text file and then uploaded to the system
+     * without manual data entry.
      * - **IT Department**: IT staff responsible for maintaining employee databases may also use this
-     *   method for bulk uploads, helping to streamline onboarding or periodic data updates.
-     *
+     * method for bulk uploads, helping to streamline onboarding or periodic data updates.
+     * <p>
      * Importance:
      * - This class plays an essential role in the program’s architecture by enabling automated data import.
      * - Reduces the potential for manual errors and ensures that large datasets can be quickly added to the
-     *   system, enhancing both speed and reliability in data management.
+     * system, enhancing both speed and reliability in data management.
      * - The `Reader` class is designed to handle common file input challenges such as missing or
-     *   improperly formatted data, improving program robustness and user experience.
+     * improperly formatted data, improving program robustness and user experience.
      *
      * @return ArrayList of `Person` objects containing data read from the file.
      */
@@ -106,14 +105,27 @@ public class Reader {
                             // Splits the row into individual data points based on commas.
                             String[] parts = row.split(",");
 
+                            String companyName = parts[8];
+                            Company currentCompany;
+                            Department currentDepartment;
+
+                            currentCompany = Store.getOrCreateCompany(companyName);
+
+                            String departmentName = parts[5];
+
+                            currentDepartment = currentCompany.getOrCreateDepartment(departmentName);
+
                             // Creates a new Person object using the parsed data and adds it to the list.
                             // Each Person instance represents a specific individual, using their first name,
                             // last name, email, and gender as identifiers.
-                            people.add(new Person(
-                                    parts[1], // First name
-                                    parts[2], // Last name
-                                    parts[3], // Email
-                                    Gender.parse(parts[4]) // Gender
+                            people.add(new Employee(
+                                    parts[0], // First name
+                                    parts[1], // Last name
+                                    parts[3], //Email
+                                    Gender.parse(parts[2]), // Gender
+                                    Double.parseDouble(parts[4]), //Salary
+                                    EmployeePosition.parse(parts[6]), //Position
+                                    currentDepartment //Department
                             ));
 
                             // Sets the flag to true, indicating successful data processing.
