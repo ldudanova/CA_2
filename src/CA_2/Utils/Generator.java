@@ -1,7 +1,6 @@
 package CA_2.Utils;
 
-import CA_2.Models.Gender;
-import CA_2.Models.Person;
+import CA_2.Models.*;
 
 import java.util.Random;
 
@@ -46,6 +45,11 @@ public class Generator {
         }
     }
 
+    /**
+     *
+     * @param length
+     * @return
+     */
     public static String generateUpperCaseString(int length) {
         // Amount of letters
         int charAmount = 'Z' - 'A' + 1;
@@ -113,6 +117,7 @@ public class Generator {
 
     /**
      *
+     * @return
      */
     public static String generateCompanyName() {
         Random random = new Random();
@@ -126,5 +131,87 @@ public class Generator {
             name = companySuffix[rnd.nextInt(companySuffix.length)];
             return generateUpperCaseString(3) + "-" + name;
         }
+    }
+
+    /**
+     *
+     * @param managerType
+     * @param position
+     * @return
+     */
+
+    public static double generateSalary(ManagerType managerType, EmployeePosition position) {
+        if (managerType == null) {
+            return generateEmployeeSalary(position);
+        } else {
+            return generateManagerSalary(managerType);
+        }
+    }
+
+    /**
+     *
+     * @param managerType
+     * @return
+     */
+    private static double generateManagerSalary(ManagerType managerType) {
+        switch (managerType) {
+            case MANAGER: {
+                return generateRandomDouble(2000, 2500);
+            }
+            case ASSISTANT_MANAGER: {
+                return generateRandomDouble(2000, 2200);
+            }
+            case HEAD_MANAGER: {
+                return generateRandomDouble(2500, 4000);
+            }
+            case SENIOR_MANAGER: {
+                return generateRandomDouble(4100, 10000);
+            }
+            case TEAM_LEAD: {
+                return generateRandomDouble(3000, 5000);
+            }
+            default: {
+                return generateRandomDouble(2000, 10000);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param position
+     * @return
+     */
+    private static double generateEmployeeSalary(EmployeePosition position) {
+        switch (position) {
+            case INTERN: {
+                return generateRandomDouble(1000, 1500);
+            }
+            case CONTRACT: {
+                return generateRandomDouble(1000, 3000);
+            }
+            case JUNIOR: {
+                return generateRandomDouble(1500, 2000);
+            }
+            case MIDDLE: {
+                return generateRandomDouble(2000, 3500);
+            }
+            case SENIOR: {
+                return generateRandomDouble(3000, 5000);
+            }
+            default: {
+                return generateRandomDouble(1000, 5000);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param min
+     * @param max
+     * @return
+     */
+    private static double generateRandomDouble(int min, int max) {
+        Random random = new Random();
+        return max + (min * random.nextDouble());
     }
 }
