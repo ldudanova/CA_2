@@ -19,7 +19,7 @@ public class Person implements Comparable<Person> {
     public String lastName;
 
     // Variable for the person's email, used for contact information and communication purposes
-    public String email;
+//    public String email;
 
     // Enum variable for the person's gender, supporting consistent and standardized gender data
     public Gender gender;
@@ -34,14 +34,14 @@ public class Person implements Comparable<Person> {
      *
      * @param firstName Person's first name
      * @param lastName Person's last name
-     * @param email Person's email address
+//     * @param email Person's email address
      * @param gender Person's gender
      */
-    public Person(String firstName, String lastName, String email, Gender gender) {
+    public Person(String firstName, String lastName, Gender gender) {
         // Set fields with provided values
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+//        this.email = email;
         this.gender = gender;
     }
 
@@ -57,8 +57,13 @@ public class Person implements Comparable<Person> {
      */
     @Override
     public String toString() {
-        return firstName + " " + lastName + " [" + this.getClass().getSimpleName() + "], " +
-                ((email != null && !email.isEmpty()) ? email : "no email") + ", " + gender;
+        return firstName
+                + " "
+                + lastName
+                + " ["
+                + this.getClass().getSimpleName()
+                + "], "
+                + gender;
     }
 
     /**
