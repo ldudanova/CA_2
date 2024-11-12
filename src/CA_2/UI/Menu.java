@@ -7,7 +7,6 @@ import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import static CA_2.Utils.InputUtilities.*;
 
@@ -383,7 +382,6 @@ public class Menu {
                             break;
                         }
                     }
-
                     break;
                 }
 
@@ -391,8 +389,8 @@ public class Menu {
                 case GENERATE: {
                     // Asking for type of object to generate
                     userGenerateOptions userGenerateOption =
-                            selectFromList("What type of object do you want to generate?", userGenerateOptions.class);
-
+                            selectFromList("What type of object do you want to generate?",
+                                    userGenerateOptions.class);
                     switch (userGenerateOption) {
                         // Generating employee
                         case DEVELOPER: {
@@ -413,13 +411,14 @@ public class Menu {
                             break;
                         }
                     }
-
                     break;
                 }
 
                 case PRINT: {
                     // Asking for type of objects to print
-                    printingType printingOption = selectFromList("What type of object do you want to print?", printingType.class);
+                    printingType printingOption =
+                            selectFromList("What type of object do you want to print?",
+                                    printingType.class);
 
                     switch (printingOption) {
                         //
@@ -428,11 +427,11 @@ public class Menu {
                             break;
                         }
                         // Printing all data from Store.people
-//                        case ALL_PEOPLE: {
-//                            System.out.println("All people:");
-//                            Printer.printPeople(Store.people, Store.people.size());
-//                            break;
-//                        }
+                        case ALL_PEOPLE: {
+                            System.out.println("All people:");
+                            Printer.printPeople(Store.people, Store.people.size());
+                            break;
+                        }
                         // Printing all items from Store.people if they are Player
 //                        case PLAYER: {
 //                            System.out.println("All players:");

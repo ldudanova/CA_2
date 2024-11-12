@@ -41,7 +41,6 @@ public class Person implements Comparable<Person> {
         // Set fields with provided values
         this.firstName = firstName;
         this.lastName = lastName;
-//        this.email = email;
         this.gender = gender;
     }
 

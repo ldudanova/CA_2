@@ -1,6 +1,7 @@
 package CA_2.Models;
 
 import CA_2.Utils.Generator;
+import CA_2.Utils.Store;
 
 import java.util.ArrayList;
 
@@ -132,5 +133,18 @@ public class Company {
                 department.print(i + 1, indent + "    ");
             }
         }
+    }
+
+    public Department getOrCreateDepartment(String departmentName) {
+        for (Department department : this.departments) {
+            if (department
+                    .getName()
+                    .equalsIgnoreCase(departmentName)) {
+                return department;
+            }
+        }
+        Department resDepartment = new CustomDepartment(departmentName);
+        this.departments.add(resDepartment);
+        return resDepartment;
     }
 }

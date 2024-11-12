@@ -57,13 +57,13 @@ public class OfficeEmployee extends Employee {
         EmployeePosition position = Generator.pickFromList(EmployeePosition.class);
 
         // Create variable for team
-        Department departmnet = null;
+        Department department = null;
 
         // If there is any teams in the system pick from them else it will be null
         if (!Store.departments.isEmpty())
-            departmnet = Generator.pickFromList(Store.getDepartmentArray());
+            department = Generator.pickFromList(Store.getDepartmentArray());
 
         // Creating and returning Developer object
-        return new OfficeEmployee(firstName, lastName, email, gender, salary, position, title, departmnet);
+        return new OfficeEmployee(firstName, lastName, email, gender, salary, position, title, department);
     }
 }

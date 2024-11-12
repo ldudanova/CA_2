@@ -15,21 +15,24 @@ public class Generator {
     /**
      * Method for getting first name form the store depending on gender
      *
-     * @param gender target name gender
+     * @param personGender target name gender
      * @return First name
      */
-    public static String getFirstName(Gender gender) {
+    public static String getFirstName(Gender personGender) {
         try {
             // Filtering list of people with certain gender and saving them to array
             Person[] array = Store.people
                     .stream()
-                    .filter(x -> x.gender == gender)
+                    .filter(x -> x.gender == personGender)
                     .toArray(Person[]::new);
             // Getting random item from the filtered list and taking first name of it
             return array[rnd.nextInt(array.length)].firstName;
         } catch (Exception e) {
+            System.out.println("Error msg: " + e.getMessage());
             // If there is any error generate first name from random letters
-            return generateUpperCaseString(1) + generateUpperCaseString(9).toLowerCase();
+            return generateUpperCaseString(1)
+                    + generateUpperCaseString(9)
+                    .toLowerCase();
         }
     }
 
@@ -135,25 +138,12 @@ public class Generator {
         }
     }
 
-    /**
-     * @param managerType
-     * @param position
-     * @return
-     */
-
-    public static double generateSalary(ManagerType managerType, EmployeePosition position) {
-        if (managerType == null) {
-            return generateEmployeeSalary(position);
-        } else {
-            return generateManagerSalary(managerType);
-        }
-    }
 
     /**
      * @param managerType
      * @return
      */
-    private static double generateManagerSalary(ManagerType managerType) {
+    public static double generateSalary(ManagerType managerType) {
         switch (managerType) {
             case MANAGER: {
                 return generateRandomDouble(2000, 2500);
@@ -180,7 +170,7 @@ public class Generator {
      * @param position
      * @return
      */
-    private static double generateEmployeeSalary(EmployeePosition position) {
+    public static double generateSalary(EmployeePosition position) {
         switch (position) {
             case INTERN: {
                 return generateRandomDouble(1000, 1500);

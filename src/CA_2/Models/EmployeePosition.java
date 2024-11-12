@@ -27,5 +27,24 @@ public enum EmployeePosition {
     public String toString() {
         return label;
     }
+
+    public static EmployeePosition parse(String position) {
+        if (position.trim().equalsIgnoreCase(EmployeePosition.INTERN.toString())) {
+            return EmployeePosition.INTERN;
+        }
+        if (position.trim().equalsIgnoreCase(EmployeePosition.JUNIOR.toString())) {
+            return EmployeePosition.JUNIOR;
+        }
+        if (position.trim().equalsIgnoreCase(EmployeePosition.MIDDLE.toString())) {
+            return EmployeePosition.MIDDLE;
+        }
+        if (position.trim().equalsIgnoreCase(EmployeePosition.SENIOR.toString())) {
+            return EmployeePosition.SENIOR;
+        }
+        if (position.trim().equalsIgnoreCase(EmployeePosition.CONTRACT.toString())) {
+            return EmployeePosition.CONTRACT;
+        }
+        return null;
+    }
 }
 

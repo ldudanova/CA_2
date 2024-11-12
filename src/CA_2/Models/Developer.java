@@ -62,17 +62,17 @@ public class Developer extends Employee {
         // Randomly choose the player position
         EmployeePosition position = Generator.pickFromList(EmployeePosition.class);
         //Generate salary
-        double salary = Generator.generateSalary(null, position);
+        double salary = Generator.generateSalary(position);
 
-        // Create variable for team
-        Department departmnet = null;
+        // Create variable for department
+        Department department = null;
 
         // If there is any teams in the system pick from them else it will be null
         if (!Store.departments.isEmpty()) {
-            departmnet = Generator.pickFromList(Store.getDepartmentArray());
+            department = Generator.pickFromList(Store.getDepartmentArray());
         }
 
         // Creating and returning Developer object
-        return new Developer(firstName, lastName, email, gender, salary, position, developerType, departmnet);
+        return new Developer(firstName, lastName, email, gender, salary, position, developerType, department);
     }
 }

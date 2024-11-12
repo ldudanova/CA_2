@@ -79,7 +79,7 @@ public class Manager extends Person {
 
         // Randomly choose the manager type
         ManagerType managerType = Generator.pickFromList(ManagerType.class);
-        double salary = Generator.generateSalary(managerType, null);
+        double salary = Generator.generateSalary(managerType);
 
         // Create variable for team
         Department department = null;
