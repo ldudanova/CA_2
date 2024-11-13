@@ -135,6 +135,12 @@ public class Company {
         }
     }
 
+    public static void create(String companyName) {
+        Company company = new Company(companyName);
+        Store.companies.add(company);
+        System.out.println("The company " + company.name + " was created");
+    }
+
     /**
      * Searches for a Company object by its name within a list of companies.
      * <p>

@@ -41,11 +41,11 @@ public class Menu {
                         case INPUT: {
                             String companyName =
                                     askUserForText("\nEnter the name for your company: ");
-                            createCompany(companyName);
+                            Company.create(companyName);
                             break;
                         }
                         case GENERATE: {
-                            createCompany(Company.generateName());
+                            Company.create(Company.generateName());
                         }
                     }
                     break;
@@ -105,7 +105,7 @@ public class Menu {
                             case CUSTOM: {
                                 String companyName =
                                         askUserForText("\nEnter the name for your company: ");
-                                createCompany(companyName);
+                                Company.create(companyName);
                                 break;
                             }
                             case GENERATE: {
@@ -228,11 +228,5 @@ public class Menu {
 
             // Repeat the loop as long as "needToExit" is false
         } while (!needToExit);
-    }
-
-    private static void createCompany(String companyName) {
-        Company company = new Company(companyName);
-        Store.companies.add(company);
-        System.out.println("The company " + company.name + " was created");
     }
 }
