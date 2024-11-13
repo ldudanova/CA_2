@@ -12,7 +12,8 @@ public enum menuOptions {
     // Option to sort a predefined list of people.
     SORT("Sort a Dummy List of People"),
     // Option to search within the list and retrieve information.
-    SEARCH("Search in the List and Return Relevant Information"),
+    SEARCH_PERSON("Search for a person in the List and Return Relevant Information"),
+    SEARCH_COMPANY("Search for a company in the List and Return Relevant Information"),
     // Option to enable user data entry (name, manager type, and department).
     USER_INPUT("Allow for New User Input (Name, ManagerChoice, and Department)"),
     // Option to create random entries with manager types and departments.

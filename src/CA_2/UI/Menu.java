@@ -77,30 +77,32 @@ public class Menu {
                     break;
                 }
 
-                // If the "SEARCH" option is selected
-                case SEARCH: {
+                // If the "SEARCH PEARSON" option is selected
+                case SEARCH_PERSON: {
                     // Asking the user for a search input (could be first name, last name, or both)
-                    String searchString = askUserForText("Enter first name, last name or both for searching: ");
+                    String searchString =
+                            askUserForText("Enter first name, last name or both for searching: ");
 
-                    // Performing a linear search in the list of people based on the search input
-                    List<Map<String, Object>> searchResult = SortAndSearchOperations.findEmployeesDataByName(searchString);
-//                    ArrayList<Person> searchResult = SortAndSearchOperations.linearSearchPeople(Store.people, searchString);
-
+                    List<PersonSearchResult> searchResult =
+                            SortAndSearchOperations.findEmployeesDataByName(searchString);
 
                     // Checking if any results were found and displaying them; otherwise, notify no results were found
                     if (searchResult.isEmpty()) {
                         System.out.println("No results were found for your request");
                     } else {
                         System.out.println("Search result: ");
-//                        Printer.printPeople(searchResult);
                         searchResult.forEach(info -> {
-                            System.out.println("Employee: " + info.get("Employee"));
-                            System.out.println("Department: " + info.get("Department"));
-                            System.out.println("Company: " + info.get("Company"));
+                            System.out.println("Employee: " + info.person);
+                            System.out.println("Department: " + info.department);
+                            System.out.println("Company: " + info.company);
                             System.out.println("---------");
                         });
-//                        searchResult.forEach((key, value) -> System.out.println("  " + key + " " + value));
                     }
+
+                    break;
+                }
+
+                case SEARCH_COMPANY: {
 
                     break;
                 }

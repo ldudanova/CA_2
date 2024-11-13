@@ -4,6 +4,7 @@ import CA_2.Models.Company;
 import CA_2.Models.Department.Department;
 import CA_2.Models.Person;
 import CA_2.Models.Menu.sortingDirection;
+import CA_2.Models.PersonSearchResult;
 
 import java.util.*;
 
@@ -95,23 +96,17 @@ public class SortAndSearchOperations {
         return result;
     }
 
-    public static List<Map<String, Object>> findEmployeesDataByName(String searchPattern) {
-        Map<String, Object> employeeInfo = new HashMap<>();
-        List<Map<String, Object>> results = new ArrayList<>();
-        Set<Person> uniqueEmployees = new HashSet<>();
+    public static List<PersonSearchResult> findEmployeesDataByName(String searchPattern) {
+        List<PersonSearchResult> results = new ArrayList<>();
 
         for (Company company : Store.companies) {
             for (Department department : company.departments) {
                 for (Person person : linearSearchPeople(department.getAllPeople(), searchPattern)) {
-                    if (!uniqueEmployees.contains(person)) {
-                        uniqueEmployees.add(person);
-
-                        employeeInfo.put("Employee", person);
-                        employeeInfo.put("Department", department);
-                        employeeInfo.put("Company", company);
-
-                        results.add(employeeInfo);
-                    }
+                    PersonSearchResult personResult = new PersonSearchResult();
+                    personResult.company = company;
+                    personResult.department = department;
+                    personResult.person = person;
+                    results.add(personResult);
                 }
 
             }
