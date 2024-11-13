@@ -115,36 +115,15 @@ public class SortAndSearchOperations {
         return results;
     }
 
-    /**
-     *
-     */
-    public static ArrayList<Company> linearSearchCompanies(ArrayList<Company> companies, String companyName) {
-
-        // Initialize an empty list to store matching results
-        ArrayList<Company> result = new ArrayList<>();
-
-        // Loop through each company in the provided list
-        for (Company company : companies) {
-            // Check if the search pattern matches the company's name (ignoring case)
-            if (company.name.equalsIgnoreCase(companyName)) {
-                // If it matches, add this company to the result list
-                result.add(company);
-            }
-        }
-
-        // Return the result list containing all matched companies
-        return result;
-    }
 
     /**
      * Searches for a Company object by its name in a list of companies.
      *
-     * @param companies List of Company objects to search.
      * @param name      The name of the company to find.
      * @return The Company object with the specified name, or null if not found.
      */
-    public static Company findCompanyByName(ArrayList<Company> companies, String name) {
-        for (Company company : companies) {
+    public static Company findCompanyByName(String name) {
+        for (Company company : Store.companies) {
             if (company.name.equalsIgnoreCase(name)) { // Case-insensitive comparison
                 return company;
             }

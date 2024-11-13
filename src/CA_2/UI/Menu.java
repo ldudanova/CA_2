@@ -103,7 +103,15 @@ public class Menu {
                 }
 
                 case SEARCH_COMPANY: {
-
+                    String searchString =
+                            askUserForText("Enter company name for searching: ");
+                    Company searchResult =
+                            SortAndSearchOperations.findCompanyByName(searchString);
+                    if (searchResult == null) {
+                        System.out.println("No results were found for your request");
+                    } else {
+                        searchResult.print(1, "  ");
+                    }
                     break;
                 }
 
