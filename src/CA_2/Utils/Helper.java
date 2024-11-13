@@ -1,7 +1,7 @@
 package CA_2.Utils;
 
 import CA_2.Models.*;
-import CA_2.UI.Menu;
+import CA_2.Models.Menu.selectDepartmentToAddObjOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -381,9 +381,9 @@ public class Helper {
     }
 
     private static Department getSelectedDepartmentToAddObj(Company company) {
-        Menu.selectDepartmentToAddObjOptions choice =
+        selectDepartmentToAddObjOptions choice =
                 InputUtilities.selectFromList("Would you like to add a new developer to:",
-                        Menu.selectDepartmentToAddObjOptions.class);
+                        selectDepartmentToAddObjOptions.class);
 
         switch (choice) {
             case EXISTING: {

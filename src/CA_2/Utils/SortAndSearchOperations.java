@@ -2,7 +2,7 @@ package CA_2.Utils;
 
 import CA_2.Models.Company;
 import CA_2.Models.Person;
-import CA_2.UI.Menu;
+import CA_2.Models.Menu.sortingDirection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ public class SortAndSearchOperations {
      * @param n         length of sorting on current iteration
      * @param direction order of sorting
      */
-    private static void recursiveInsertionSort(Person[] array, int n, Menu.sortingDirection direction) {
+    private static void recursiveInsertionSort(Person[] array, int n, sortingDirection direction) {
         // Base case: if there's only one element, it's already "sorted"
         if (n <= 1) {
             return;
@@ -29,8 +29,8 @@ public class SortAndSearchOperations {
         int j = n - 2;
 
         // Shift elements as needed based on sorting direction
-        while (j >= 0 && (direction == Menu.sortingDirection.ASC && array[j].compareTo(last) > 0 ||
-                direction == Menu.sortingDirection.DESC && array[j].compareTo(last) < 0)) {
+        while (j >= 0 && (direction == sortingDirection.ASC && array[j].compareTo(last) > 0 ||
+                direction == sortingDirection.DESC && array[j].compareTo(last) < 0)) {
             array[j + 1] = array[j];
             j--;
         }
@@ -48,7 +48,7 @@ public class SortAndSearchOperations {
      * @param direction order of sorting
      * @return copy of original list but sorted
      */
-    public static ArrayList<Person> recursiveInsertionSort(ArrayList<Person> people, Menu.sortingDirection direction) {
+    public static ArrayList<Person> recursiveInsertionSort(ArrayList<Person> people, sortingDirection direction) {
         // Copying list of people into array
         Person[] array = new Person[people.size()];
         array = people.toArray(array);
