@@ -1,5 +1,7 @@
 package CA_2.Models;
 
+import java.util.Random;
+
 /**
  * Enum with department type values
  */
@@ -34,5 +36,10 @@ public enum DepartmentDefaultType {
     @Override
     public String toString() {
         return label;
+    }
+
+    public static DepartmentDefaultType getRandomDepartment() {
+        DepartmentDefaultType[] values = DepartmentDefaultType.values();
+        return values[new Random().nextInt(values.length)];
     }
 }

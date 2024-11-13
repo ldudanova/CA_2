@@ -7,9 +7,12 @@ import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static CA_2.Utils.Helper.canAddDepartment;
+import static CA_2.Utils.Helper.getRandomOrGeneratedCompany;
 import static CA_2.Utils.InputUtilities.*;
 
 /**
@@ -130,6 +133,7 @@ public class Menu {
         DEVELOPER("Developer"),
         // Option to generate a Manager.
         MANAGER("Manager"),
+        OFFICE_EMPLOYEE("Office employee"),
         COMPANY("Company");
 
         // String label that holds the display name for each user input option.
@@ -233,13 +237,7 @@ public class Menu {
         //
         ALL_COMPANIES("All companies"),
         // Option to print all people (both employees and managers).
-        ALL_PEOPLE("All people"),
-        // Option to print only employees.
-        DEVELOPER("Developers"),
-        // Option to print only managers.
-        MANAGER("Managers"),
-        // Option to print only departments.
-        DEPARTMENT("Departments");
+        ALL_PEOPLE("All people");
 
         // String label that holds the display name for each printing option.
         private final String label;
@@ -414,17 +412,44 @@ public class Menu {
                             Store.people.add(manager);
                             Company randomCompany;
                             Department randomDep;
-                            if (Store.companies.isEmpty()) {
-                                Store.companies.add(Company.generate());
-                            }
-                            randomCompany = Store.companies.get(new Random().nextInt(Store.companies.size()));
-                            randomDep = randomCompany.departments.get(new Random().nextInt(randomCompany.departments.size()));
+//                            if (Store.companies.isEmpty()) {
+//                                Store.companies.add(Company.generate());
+//                            }
+                            randomCompany = getRandomOrGeneratedCompany();
 
-//                            Department itDep = randomCompany.getOrCreateDepartment(randomDep.getName());
+                            randomDep = randomCompany.departments.get(new Random().nextInt(randomCompany.departments.size()));
                             randomDep.addPerson(manager);
                             System.out.println("Manager " + manager + "has been added to " + randomCompany.getName());
                             break;
                         }
+                        // Generating office employee
+                        case OFFICE_EMPLOYEE: {
+                            OfficeEmployee officeEmployee = OfficeEmployee.generate();
+                            Store.people.add(officeEmployee);
+                            Company randomCompany;
+                            Department randomDep;
+//                            if (Store.companies.isEmpty()) {
+//                                Store.companies.add(Company.generate());
+//                            }
+//                            randomCompany = Store.companies.get(new Random().nextInt(Store.companies.size()));
+                            randomCompany = getRandomOrGeneratedCompany();
+
+                            List<Department> nonITDepartments = randomCompany.departments
+                                    .stream()
+                                    .filter(department -> !department.getName().equalsIgnoreCase("IT"))
+                                    .collect(Collectors.toList());
+
+                            if (!nonITDepartments.isEmpty()) {
+                                randomDep = nonITDepartments.get(new Random().nextInt(nonITDepartments.size()));
+                            } else {
+                                randomDep = new CustomDepartment(DepartmentDefaultType.HUMAN_RESOURCES.toString());
+                            }
+
+                            randomDep.addPerson(officeEmployee);
+                            System.out.println("Office employee " + officeEmployee + "has been added to " + randomCompany.getName());
+                            break;
+                        }
+                        // Generating company
                         case COMPANY: {
                             Company newCompany = Company.generate();
                             Store.companies.add(newCompany);
@@ -453,28 +478,6 @@ public class Menu {
                             Printer.printPeople(Store.people, Store.people.size());
                             break;
                         }
-                        // Printing all items from Store.people if they are Player
-//                        case PLAYER: {
-//                            System.out.println("All players:");
-//
-//                            Printer.printPeople(Store.people.stream().filter(x -> x instanceof Player).collect(Collectors.toCollection(ArrayList::new)));
-//
-//                            break;
-//                        }
-                        // Printing all items from Store.people if they are Coaches
-//                        case COACH: {
-//                            System.out.println("All coaches:");
-//
-//                            Printer.printPeople(Store.people.stream().filter(x -> x instanceof Coach).collect(Collectors.toCollection(ArrayList::new)));
-//
-//                            break;
-//                        }
-                        // Printing all teams
-//                        case TEAM: {
-//                            System.out.println("All teams:");
-//                            Printer.printTeams(Store.teams);
-//                            break;
-//                        }
                     }
 
                     break;

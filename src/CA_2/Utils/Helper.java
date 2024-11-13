@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Random;
 
 import static CA_2.Utils.InputUtilities.*;
 import static CA_2.Utils.InputUtilities.selectFromList;
@@ -339,6 +340,13 @@ public class Helper {
                 position,
                 officeEmployeeTitle
         );
+    }
+
+    public static Company getRandomOrGeneratedCompany() {
+        if (Store.companies.isEmpty()) {
+            Store.companies.add(Company.generate());
+        }
+        return Store.companies.get(new Random().nextInt(Store.companies.size()));
     }
 
     private static Department getSelectedDepartmentToAddObj(Company company) {
