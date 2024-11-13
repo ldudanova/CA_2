@@ -350,7 +350,7 @@ public class Helper {
     }
 
     public static Developer generateDeveloperAndAddDeveloperToITDepartment(Company company) {
-        Developer developer = Developer.generate();
+        Developer developer = Developer.generate(company.getName());
         Store.people.add(developer);
         Department ITDe =
                 company.getOrCreateDepartment(DepartmentDefaultType.IT.toString());
@@ -362,7 +362,7 @@ public class Helper {
         Department randomDep =
                 new PrecreatedDepartment(DepartmentDefaultType.getRandomDepartment());
         company.departments.add(randomDep);
-        Manager newManager = Manager.generate();
+        Manager newManager = Manager.generate(company.getName());
         randomDep.addPerson(newManager);
         return newManager;
     }
@@ -375,7 +375,7 @@ public class Helper {
         } else {
             randomDep = new CustomDepartment(DepartmentDefaultType.HUMAN_RESOURCES.toString());
         }
-        OfficeEmployee newOfficeEmployee = OfficeEmployee.generate();
+        OfficeEmployee newOfficeEmployee = OfficeEmployee.generate(company.getName());
         randomDep.addPerson(newOfficeEmployee);
         return newOfficeEmployee;
     }

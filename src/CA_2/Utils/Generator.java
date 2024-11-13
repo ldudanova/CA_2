@@ -17,10 +17,10 @@ public class Generator {
             // Filtering list of people with certain gender and saving them to array
             Person[] array = Store.people
                     .stream()
-                    .filter(x -> x.gender == personGender)
+                    .filter(x -> x.getGender() == personGender)
                     .toArray(Person[]::new);
             // Getting random item from the filtered list and taking first name of it
-            return array[rnd.nextInt(array.length)].firstName;
+            return array[rnd.nextInt(array.length)].getFirstName();
         } catch (Exception e) {
             System.out.println("Error msg: " + e.getMessage());
             // If there is any error generate first name from random letters
@@ -38,7 +38,7 @@ public class Generator {
     public static String getLastName() {
         try {
             // Getting random item from list of all people and taking last name of it
-            return Store.people.get(rnd.nextInt(Store.people.size())).lastName;
+            return Store.people.get(rnd.nextInt(Store.people.size())).getLastName();
         } catch (Exception e) {
             // If there is any error generate last name from random letters
             return generateUpperCaseString(1) + generateUpperCaseString(9).toLowerCase();
@@ -80,11 +80,10 @@ public class Generator {
      * @param lastName  last name
      * @return generated email
      */
-    public static String generateEmail(String firstName, String lastName) {
-        return firstName.toLowerCase().charAt(0) +   // first letter of first name
-                lastName.toLowerCase() + "@domain-" +  // last name + constant
-                generateUpperCaseString(3).toLowerCase() + "." + // 3 letters and dot
-                generateUpperCaseString(2).toLowerCase();       // 2 letters
+    public static String generateEmail(String firstName, String lastName, String companyName) {
+        return firstName.toLowerCase().charAt(0)   // first letter of first name
+                + lastName.toLowerCase()  //lower cased last name
+                + "@" + companyName + ".com"; //company name as a domain
     }
 
     /**

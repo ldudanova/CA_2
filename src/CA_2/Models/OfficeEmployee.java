@@ -39,7 +39,7 @@ public class OfficeEmployee extends Employee {
      *
      * @return Generated Developer object
      */
-    public static OfficeEmployee generate() {
+    public static OfficeEmployee generate(String companyName) {
         // Randomly choose the gender
         Gender gender = Generator.pickFromList(Gender.class);
         // Randomly choose the first name from existing names
@@ -47,7 +47,7 @@ public class OfficeEmployee extends Employee {
         // Randomly choose the last name from existing last lames
         String lastName = Generator.getLastName();
         // Generate an email based on first and last names
-        String email = Generator.generateEmail(firstName, lastName);
+        String email = Generator.generateEmail(firstName, lastName, companyName);
         //Generate employee type
         String title = generateJobTitle();
         // Randomly choose the player position

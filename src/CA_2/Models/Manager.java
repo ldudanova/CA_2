@@ -1,7 +1,6 @@
 package CA_2.Models;
 
 import CA_2.Utils.Generator;
-import CA_2.Utils.Store;
 
 /**
  * Class for storing manager specified information
@@ -61,7 +60,7 @@ public class Manager extends Person {
      *
      * @return Generated Manager object
      */
-    public static Manager generate() {
+    public static Manager generate(String companyName) {
         // Randomly choose the gender
         Gender gender = Generator.pickFromList(Gender.class);
         // Randomly choose the first name from existing names
@@ -69,21 +68,15 @@ public class Manager extends Person {
         // Randomly choose the last name from existing last lames
         String lastName = Generator.getLastName();
         // Generate an email based on first and last names
-        String email = Generator.generateEmail(firstName, lastName);
+        String email = Generator.generateEmail(firstName, lastName, companyName);
 
         // Randomly choose the manager type
         ManagerType managerType = Generator.pickFromList(ManagerType.class);
         double salary = Generator.generateSalary(managerType);
 
-        // Create variable for team
-        Department department = null;
-
-        // If there is any departments in the system pick from them else it will be null
-        if (!Store.departments.isEmpty())
-            department = Generator.pickFromList(Store.getDepartmentArray());
-
         // Creating and returning Manager object
-        return new Manager(firstName,
+        return new Manager(
+                firstName,
                 lastName,
                 email,
                 gender,

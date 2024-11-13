@@ -1,11 +1,12 @@
 package CA_2.Utils;
 
 import CA_2.Models.Company;
+import CA_2.Models.Department;
 import CA_2.Models.Person;
 import CA_2.Models.Menu.sortingDirection;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+
 
 public class SortAndSearchOperations {
     /**
@@ -94,6 +95,31 @@ public class SortAndSearchOperations {
         return result;
     }
 
+    public static List<Map<String, Object>> findEmployeesDataByName(String searchPattern) {
+        Map<String, Object> employeeInfo = new HashMap<>();
+        List<Map<String, Object>> results = new ArrayList<>();
+        Set<Person> uniqueEmployees = new HashSet<>();
+
+        for (Company company : Store.companies) {
+            for (Department department : company.departments) {
+                for (Person person : linearSearchPeople(department.getAllPeople(), searchPattern)) {
+                    if (!uniqueEmployees.contains(person)) {
+                        uniqueEmployees.add(person);
+
+                        employeeInfo.put("Employee", person);
+                        employeeInfo.put("Department", department);
+                        employeeInfo.put("Company", company);
+
+                        results.add(employeeInfo);
+                    }
+                }
+
+            }
+        }
+
+        return results;
+    }
+
     /**
      *
      */
@@ -119,7 +145,7 @@ public class SortAndSearchOperations {
      * Searches for a Company object by its name in a list of companies.
      *
      * @param companies List of Company objects to search.
-     * @param name The name of the company to find.
+     * @param name      The name of the company to find.
      * @return The Company object with the specified name, or null if not found.
      */
     public static Company findCompanyByName(ArrayList<Company> companies, String name) {

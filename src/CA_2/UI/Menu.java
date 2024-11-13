@@ -7,6 +7,8 @@ import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static CA_2.Utils.InputUtilities.*;
@@ -79,14 +81,23 @@ public class Menu {
                     String searchString = askUserForText("Enter first name, last name or both for searching: ");
 
                     // Performing a linear search in the list of people based on the search input
-                    ArrayList<Person> searchResult = SortAndSearchOperations.linearSearchPeople(Store.people, searchString);
+                    List<Map<String, Object>> searchResult = SortAndSearchOperations.findEmployeesDataByName(searchString);
+//                    ArrayList<Person> searchResult = SortAndSearchOperations.linearSearchPeople(Store.people, searchString);
+
 
                     // Checking if any results were found and displaying them; otherwise, notify no results were found
                     if (searchResult.isEmpty()) {
                         System.out.println("No results were found for your request");
                     } else {
                         System.out.println("Search result: ");
-                        Printer.printPeople(searchResult);
+//                        Printer.printPeople(searchResult);
+                        searchResult.forEach(info -> {
+                            System.out.println("Employee: " + info.get("Employee"));
+                            System.out.println("Department: " + info.get("Department"));
+                            System.out.println("Company: " + info.get("Company"));
+                            System.out.println("---------");
+                        });
+//                        searchResult.forEach((key, value) -> System.out.println("  " + key + " " + value));
                     }
 
                     break;

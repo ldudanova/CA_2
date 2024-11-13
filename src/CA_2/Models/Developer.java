@@ -46,7 +46,7 @@ public class Developer extends Employee {
      *
      * @return Generated Developer object
      */
-    public static Developer generate() {
+    public static Developer generate(String companyName) {
         // Randomly choose the gender
         Gender gender = Generator.pickFromList(Gender.class);
         // Randomly choose the first name from existing names
@@ -54,22 +54,13 @@ public class Developer extends Employee {
         // Randomly choose the last name from existing last lames
         String lastName = Generator.getLastName();
         // Generate an email based on first and last names
-        String email = Generator.generateEmail(firstName, lastName);
+        String email = Generator.generateEmail(firstName, lastName, companyName);
         //Generate developer type
         DeveloperType developerType = Generator.pickFromList(DeveloperType.class);
         // Randomly choose the player position
         EmployeePosition position = Generator.pickFromList(EmployeePosition.class);
         //Generate salary
         double salary = Generator.generateSalary(position);
-
-        // Create variable for department
-        Department department = null;
-
-        // If there is any teams in the system pick from them else it will be null
-        if (!Store.departments.isEmpty()) {
-            department = Generator.pickFromList(Store.getDepartmentArray());
-        }
-
         // Creating and returning Developer object
         return new Developer(firstName, lastName, email, gender, salary, position, developerType);
     }

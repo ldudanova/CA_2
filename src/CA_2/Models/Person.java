@@ -24,6 +24,18 @@ public class Person implements Comparable<Person> {
     // Enum variable for the person's gender, supporting consistent and standardized gender data
     public Gender gender;
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
     /**
      * Constructor for creating a `Person` object.
      *

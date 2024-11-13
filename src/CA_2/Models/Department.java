@@ -65,6 +65,23 @@ public abstract class Department {
         return getName() + (getType() == DepartmentBaseType.CUSTOM ? " (Custom)" : "");
     }
 
+    public ArrayList<Developer> getDevelopers() {
+        return developers;
+    }
+    public ArrayList<Manager> getManagers() {
+        return managers;
+    }
+
+    public ArrayList<OfficeEmployee> getOfficeEmployees() {
+        return officeEmployees;
+    }
+    public ArrayList<Person> getAllPeople() {
+        ArrayList<Person> people = new ArrayList<>(getManagers());
+        people.addAll(getDevelopers());
+        people.addAll(getOfficeEmployees());
+        return people;
+    }
+
     public void addPerson(Person person) {
         if (person instanceof Manager) {
             this.managers.add((Manager) person);
