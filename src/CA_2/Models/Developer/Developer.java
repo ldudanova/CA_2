@@ -1,7 +1,9 @@
-package CA_2.Models;
+package CA_2.Models.Developer;
 
+import CA_2.Models.Employee.Employee;
+import CA_2.Models.Employee.EmployeePosition;
+import CA_2.Models.Gender;
 import CA_2.Utils.Generator;
-import CA_2.Utils.Store;
 
 /**
  * Class for storing employee specified information

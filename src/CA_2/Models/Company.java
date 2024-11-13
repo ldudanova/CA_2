@@ -1,5 +1,7 @@
 package CA_2.Models;
 
+import CA_2.Models.Department.CustomDepartment;
+import CA_2.Models.Department.Department;
 import CA_2.Utils.Generator;
 import CA_2.Utils.Helper;
 import CA_2.Utils.Store;

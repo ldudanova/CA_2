@@ -1,4 +1,9 @@
-package CA_2.Models;
+package CA_2.Models.Department;
+
+import CA_2.Models.Developer.Developer;
+import CA_2.Models.Manager.Manager;
+import CA_2.Models.OfficeEmployee;
+import CA_2.Models.Person;
 
 import java.util.ArrayList;
 

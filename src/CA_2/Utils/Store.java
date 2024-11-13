@@ -3,7 +3,7 @@ package CA_2.Utils;
 // Importing the Company, DepartmentBase, and Person classes from the Models package
 
 import CA_2.Models.Company;
-import CA_2.Models.Department;
+import CA_2.Models.Department.Department;
 import CA_2.Models.Person;
 
 // Importing ArrayList from java.util package for dynamic array functionality

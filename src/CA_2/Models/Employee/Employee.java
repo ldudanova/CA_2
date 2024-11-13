@@ -1,6 +1,9 @@
-package CA_2.Models;
+package CA_2.Models.Employee;
 
-public class Employee extends Person  {
+import CA_2.Models.Gender;
+import CA_2.Models.Person;
+
+public class Employee extends Person {
     public EmployeePosition position;
     public double salary;
     public String email;

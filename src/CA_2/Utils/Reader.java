@@ -1,6 +1,8 @@
 package CA_2.Utils;
 
 import CA_2.Models.*;
+import CA_2.Models.Department.Department;
+import CA_2.Models.Employee.EmployeePosition;
 
 // Importing necessary libraries
 import java.io.FileReader;

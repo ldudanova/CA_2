@@ -1,4 +1,4 @@
-package CA_2.Models;
+package CA_2.Models.Department;
 
 /**
  * Enum with department type values

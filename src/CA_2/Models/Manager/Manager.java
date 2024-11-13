@@ -1,5 +1,7 @@
-package CA_2.Models;
+package CA_2.Models.Manager;
 
+import CA_2.Models.Gender;
+import CA_2.Models.Person;
 import CA_2.Utils.Generator;
 
 /**

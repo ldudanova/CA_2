@@ -1,5 +1,7 @@
 package CA_2.Models;
 
+import CA_2.Models.Employee.Employee;
+import CA_2.Models.Employee.EmployeePosition;
 import CA_2.Utils.Generator;
 
 import java.util.Random;

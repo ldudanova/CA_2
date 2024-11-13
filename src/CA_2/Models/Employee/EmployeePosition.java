@@ -1,4 +1,4 @@
-package CA_2.Models;
+package CA_2.Models.Employee;
 
 /**
  * Enum with employee type values

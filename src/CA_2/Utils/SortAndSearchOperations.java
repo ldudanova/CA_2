@@ -1,7 +1,7 @@
 package CA_2.Utils;
 
 import CA_2.Models.Company;
-import CA_2.Models.Department;
+import CA_2.Models.Department.Department;
 import CA_2.Models.Person;
 import CA_2.Models.Menu.sortingDirection;
 

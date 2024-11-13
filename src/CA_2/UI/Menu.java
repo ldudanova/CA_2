@@ -1,6 +1,8 @@
 package CA_2.UI;
 
 import CA_2.Models.*;
+import CA_2.Models.Developer.Developer;
+import CA_2.Models.Manager.Manager;
 import CA_2.Models.Menu.*;
 import CA_2.Utils.Helper;
 import CA_2.Utils.SortAndSearchOperations;

@@ -1,4 +1,8 @@
-package CA_2.Models;
+package CA_2.Models.Department;
+
+import CA_2.Models.Department.Department;
+import CA_2.Models.Department.DepartmentBaseType;
+import CA_2.Models.Department.DepartmentDefaultType;
 
 public class PrecreatedDepartment extends Department {
     private DepartmentDefaultType SelectedDepartment;
