@@ -405,7 +405,7 @@ public class Menu {
 
                       /*      Department itDep = randomCompany.getOrCreateDepartment(DepartmentDefaultType.IT.toString());
                             itDep.addPerson(developer);*/
-                            System.out.println("Developer " + developer + "has been added to " + randomCompany.getName());
+                            System.out.println("Developer " + developer + " has been added to " + randomCompany.getName());
                             break;
                         }
                         // Generating manager
@@ -421,7 +421,7 @@ public class Menu {
 /*
                             randomDep = randomCompany.departments.get(new Random().nextInt(randomCompany.departments.size()));
                             randomDep.addPerson(manager);*/
-                            System.out.println("Manager " + manager + "has been added to " + randomCompany.getName());
+                            System.out.println("Manager " + manager + " has been added to " + randomCompany.getName());
                             break;
                         }
                         // Generating office employee
@@ -431,7 +431,7 @@ public class Menu {
                             OfficeEmployee officeEmployee =
                                     Helper.generateOfficeEmployeeAndAddOfficeEmployeeToNonITDepartment(randomCompany);
                             Store.people.add(officeEmployee);
-                            System.out.println("Office employee " + officeEmployee + "has been added to " + randomCompany.getName());
+                            System.out.println("Office employee " + officeEmployee + " has been added to " + randomCompany.getName());
                             break;
                         }
                         // Generating company

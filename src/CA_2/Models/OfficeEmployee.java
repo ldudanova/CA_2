@@ -3,6 +3,8 @@ package CA_2.Models;
 import CA_2.Utils.Generator;
 import CA_2.Utils.Store;
 
+import java.util.Random;
+
 public class OfficeEmployee extends Employee {
     public String title;
 
@@ -48,7 +50,7 @@ public class OfficeEmployee extends Employee {
         // Generate an email based on first and last names
         String email = Generator.generateEmail(firstName, lastName);
         //Generate employee type
-        String title = Generator.generateOfficeEmployeeJobTitle(); //TODO
+        String title = generateJobTitle();
         // Randomly choose the player position
         EmployeePosition position = Generator.pickFromList(EmployeePosition.class);
         //Generate salary
@@ -57,4 +59,11 @@ public class OfficeEmployee extends Employee {
         // Creating and returning Developer object
         return new OfficeEmployee(firstName, lastName, email, gender, salary, position, title);
     }
+
+    public static String generateJobTitle() {
+        return possibleOfficeEmployeeJobTitles[new Random().nextInt(possibleOfficeEmployeeJobTitles.length)];
+    }
+    private static final String[] possibleOfficeEmployeeJobTitles =
+            new String[]{"Clerk", "White-collar", "Office rat", "Office plankton", "Salary person", "Corporate stooge", "Cubicle mouse", "Desk jockey", "Office monkey", "Dweller of a cubicle farm", "Lemming", "Cubicle dweller", "Pin-striped worker"};
+
 }

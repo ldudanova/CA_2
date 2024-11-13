@@ -109,9 +109,9 @@ public class Generator {
         return array[rnd.nextInt(array.length)];
     }
 
-    public static String generateOfficeEmployeeJobTitle() {
+ /*   public static String generateOfficeEmployeeJobTitle() {
        return possibleOfficeEmployeeJobTitles[rnd.nextInt(possibleOfficeEmployeeJobTitles.length)];
-    }
+    }*/
 
 
     /**
@@ -183,7 +183,9 @@ public class Generator {
         return max + (min * random.nextDouble());
     }
 
+/*
     private static final String[] possibleOfficeEmployeeJobTitles =
             new String[]{"Clerk", "White-collar", "Office rat", "Office plankton", "Salary person", "Corporate stooge", "Cubicle mouse", "Desk jockey", "Office monkey", "Dweller of a cubicle farm", "Lemming", "Cubicle dweller", "Pin-striped worker"};
+*/
 
 }
