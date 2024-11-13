@@ -284,7 +284,7 @@ public class Menu {
                             break;
                         }
                         case GENERATE: {
-                            createCompany(Generator.generateCompanyName());
+                            createCompany(Company.generateName());
                         }
                     }
                     break;

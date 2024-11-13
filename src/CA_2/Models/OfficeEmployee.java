@@ -47,20 +47,12 @@ public class OfficeEmployee extends Employee {
         String lastName = Generator.getLastName();
         // Generate an email based on first and last names
         String email = Generator.generateEmail(firstName, lastName);
-        //Generate salary
-        double salary = 100.00; //TODO
-        //Generate developer type
-        String title = "Clerk"; //TODO
-
+        //Generate employee type
+        String title = Generator.generateOfficeEmployeeJobTitle(); //TODO
         // Randomly choose the player position
         EmployeePosition position = Generator.pickFromList(EmployeePosition.class);
-
-        // Create variable for team
-        Department department = null;
-
-        // If there is any teams in the system pick from them else it will be null
-        if (!Store.departments.isEmpty())
-            department = Generator.pickFromList(Store.getDepartmentArray());
+        //Generate salary
+        double salary = Generator.generateSalary(position);
 
         // Creating and returning Developer object
         return new OfficeEmployee(firstName, lastName, email, gender, salary, position, title);

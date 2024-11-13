@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+
 /**
  * The Company class represents a company entity within the application, holding
  * essential data about the company, such as its name and associated departments.
@@ -86,7 +87,7 @@ public class Company {
     public static Company generate() {
         // Calls an external utility to generate a unique, random company name.
         String name;
-        name = Generator.generateCompanyName();
+        name = generateName();
 
         boolean isUniqueName = false;
 
@@ -95,7 +96,7 @@ public class Company {
                 if (Store.companies.get(i)
                         .getName()
                         .equalsIgnoreCase(name)) {
-                    name = Generator.generateCompanyName();
+                    name = generateName();
                 } else {
                     isUniqueName = true;
                 }
@@ -115,6 +116,23 @@ public class Company {
             }
 
         return newCompany;
+    }
+
+    /**
+     * @return
+     */
+    public static String generateName() {
+        Random random = new Random();
+        int number = random.nextInt(10); //
+        String name;
+
+        if (number % 2 == 0) {
+            name = companyPredicate[random.nextInt(companyPredicate.length)];
+            return name + "-" + Generator.generateUpperCaseString(3);
+        } else {
+            name = companySuffix[random.nextInt(companySuffix.length)];
+            return Generator.generateUpperCaseString(3) + "-" + name;
+        }
     }
 
     /**
@@ -185,4 +203,11 @@ public class Company {
                 .filter(department -> !department.getName().equalsIgnoreCase("IT"))
                 .collect(Collectors.toList());
     }
+
+    // Array with company predicates for generating team names
+    private static final String[] companyPredicate =
+            new String[]{"I", "IT", "Tech", "Group", "Web", "Dev", "Data", "Net"};
+    private static final String[] companySuffix =
+            new String[]{"IT", "Tech", "Group", "Pro", "Max", "Technologies", "Hub", "Computing", "Development"};
+
 }

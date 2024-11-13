@@ -6,12 +6,6 @@ import java.util.Random;
 
 public class Generator {
 
-    // Object for getting random values
-    private static final Random rnd = new Random();
-    // Array with letters
-    private static char[] letters = null;
-
-
     /**
      * Method for getting first name form the store depending on gender
      *
@@ -115,27 +109,8 @@ public class Generator {
         return array[rnd.nextInt(array.length)];
     }
 
-    // Array with company predicates for generating team names
-    private static final String[] companyPredicate =
-            new String[]{"I", "IT", "Tech", "Group", "Web", "Dev", "Data", "Net"};
-    private static final String[] companySuffix =
-            new String[]{"IT", "Tech", "Group", "Pro", "Max", "Technologies", "Hub", "Computing", "Development"};
-
-    /**
-     * @return
-     */
-    public static String generateCompanyName() {
-        Random random = new Random();
-        int number = random.nextInt(10); //
-        String name;
-
-        if (number % 2 == 0) {
-            name = companyPredicate[rnd.nextInt(companyPredicate.length)];
-            return name + "-" + generateUpperCaseString(3);
-        } else {
-            name = companySuffix[rnd.nextInt(companySuffix.length)];
-            return generateUpperCaseString(3) + "-" + name;
-        }
+    public static String generateOfficeEmployeeJobTitle() {
+       return possibleOfficeEmployeeJobTitles[rnd.nextInt(possibleOfficeEmployeeJobTitles.length)];
     }
 
 
@@ -193,6 +168,11 @@ public class Generator {
         }
     }
 
+    // Object for getting random values
+    private static final Random rnd = new Random();
+    // Array with letters
+    private static char[] letters = null;
+
     /**
      * @param min
      * @param max
@@ -202,4 +182,8 @@ public class Generator {
         Random random = new Random();
         return max + (min * random.nextDouble());
     }
+
+    private static final String[] possibleOfficeEmployeeJobTitles =
+            new String[]{"Clerk", "White-collar", "Office rat", "Office plankton", "Salary person", "Corporate stooge", "Cubicle mouse", "Desk jockey", "Office monkey", "Dweller of a cubicle farm", "Lemming", "Cubicle dweller", "Pin-striped worker"};
+
 }
