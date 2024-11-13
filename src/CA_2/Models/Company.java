@@ -1,9 +1,13 @@
 package CA_2.Models;
 
 import CA_2.Utils.Generator;
+import CA_2.Utils.Helper;
 import CA_2.Utils.Store;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * The Company class represents a company entity within the application, holding
@@ -81,10 +85,36 @@ public class Company {
      */
     public static Company generate() {
         // Calls an external utility to generate a unique, random company name.
-        String name = Generator.generateCompanyName();
+        String name;
+        name = Generator.generateCompanyName();
 
+        boolean isUniqueName = false;
 
-        return new Company(name); // Returns a new Company object initialized with the generated name.
+        while (!isUniqueName) {
+            for (int i = 0; i < Store.companies.size(); i++) {
+                if (Store.companies.get(i)
+                        .getName()
+                        .equalsIgnoreCase(name)) {
+                    name = Generator.generateCompanyName();
+                } else {
+                    isUniqueName = true;
+                }
+            }
+        }
+
+        Company newCompany = new Company(name);
+        int randomNumber = new Random().nextInt((10 - 1) + 1) + 1;
+
+            for (int i = 0; i <= randomNumber; i++) {
+                //Generate developer
+                Helper.generateDeveloperAndAddDeveloperToITDepartment(newCompany);
+                //Generate dep and manager
+                Helper.generateManagerAndAddManagerToDepartment(newCompany);
+                //Generate nonITDep and Office employee
+                Helper.generateOfficeEmployeeAndAddOfficeEmployeeToNonITDepartment(newCompany);
+            }
+
+        return newCompany;
     }
 
     /**
@@ -147,5 +177,12 @@ public class Company {
         Department resDepartment = new CustomDepartment(departmentName);
         this.departments.add(resDepartment);
         return resDepartment;
+    }
+
+    public List<Department> getNonITDepartments() {
+        return this.departments
+                .stream()
+                .filter(department -> !department.getName().equalsIgnoreCase("IT"))
+                .collect(Collectors.toList());
     }
 }

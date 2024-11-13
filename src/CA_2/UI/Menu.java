@@ -7,13 +7,10 @@ import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
-import static CA_2.Utils.Helper.canAddDepartment;
-import static CA_2.Utils.Helper.getRandomOrGeneratedCompany;
 import static CA_2.Utils.InputUtilities.*;
+import static CA_2.Utils.Helper.getRandomOrGeneratedCompany;
 
 /**
  * Class for displaying a menu and asking the user for their choice.
@@ -394,58 +391,46 @@ public class Menu {
                     switch (userGenerateOption) {
                         // Generating employee
                         case DEVELOPER: {
-                            Developer developer = Developer.generate();
-                            Store.people.add(developer);
                             Company randomCompany;
                             if (Store.companies.isEmpty()) {
                                 Store.companies.add(Company.generate());
                             }
-                            randomCompany = Store.companies.get(new Random().nextInt(Store.companies.size()));
-                            Department itDep = randomCompany.getOrCreateDepartment(DepartmentDefaultType.IT.toString());
-                            itDep.addPerson(developer);
+                            randomCompany =
+                                    Store.companies
+                                            .get(new Random()
+                                                    .nextInt(Store.companies.size()));
+                            Developer developer =
+                                    Helper.generateDeveloperAndAddDeveloperToITDepartment(randomCompany);
+                            Store.people.add(developer);
+
+                      /*      Department itDep = randomCompany.getOrCreateDepartment(DepartmentDefaultType.IT.toString());
+                            itDep.addPerson(developer);*/
                             System.out.println("Developer " + developer + "has been added to " + randomCompany.getName());
                             break;
                         }
                         // Generating manager
                         case MANAGER: {
-                            Manager manager = Manager.generate();
-                            Store.people.add(manager);
                             Company randomCompany;
-                            Department randomDep;
+//                            Department randomDep;
 //                            if (Store.companies.isEmpty()) {
 //                                Store.companies.add(Company.generate());
 //                            }
                             randomCompany = getRandomOrGeneratedCompany();
-
+                            Manager manager = Helper.generateManagerAndAddManagerToDepartment(randomCompany);
+                            Store.people.add(manager);
+/*
                             randomDep = randomCompany.departments.get(new Random().nextInt(randomCompany.departments.size()));
-                            randomDep.addPerson(manager);
+                            randomDep.addPerson(manager);*/
                             System.out.println("Manager " + manager + "has been added to " + randomCompany.getName());
                             break;
                         }
                         // Generating office employee
                         case OFFICE_EMPLOYEE: {
-                            OfficeEmployee officeEmployee = OfficeEmployee.generate();
-                            Store.people.add(officeEmployee);
                             Company randomCompany;
-                            Department randomDep;
-//                            if (Store.companies.isEmpty()) {
-//                                Store.companies.add(Company.generate());
-//                            }
-//                            randomCompany = Store.companies.get(new Random().nextInt(Store.companies.size()));
                             randomCompany = getRandomOrGeneratedCompany();
-
-                            List<Department> nonITDepartments = randomCompany.departments
-                                    .stream()
-                                    .filter(department -> !department.getName().equalsIgnoreCase("IT"))
-                                    .collect(Collectors.toList());
-
-                            if (!nonITDepartments.isEmpty()) {
-                                randomDep = nonITDepartments.get(new Random().nextInt(nonITDepartments.size()));
-                            } else {
-                                randomDep = new CustomDepartment(DepartmentDefaultType.HUMAN_RESOURCES.toString());
-                            }
-
-                            randomDep.addPerson(officeEmployee);
+                            OfficeEmployee officeEmployee =
+                                    Helper.generateOfficeEmployeeAndAddOfficeEmployeeToNonITDepartment(randomCompany);
+                            Store.people.add(officeEmployee);
                             System.out.println("Office employee " + officeEmployee + "has been added to " + randomCompany.getName());
                             break;
                         }

@@ -349,6 +349,37 @@ public class Helper {
         return Store.companies.get(new Random().nextInt(Store.companies.size()));
     }
 
+    public static Developer generateDeveloperAndAddDeveloperToITDepartment(Company company) {
+        Developer developer = Developer.generate();
+        Store.people.add(developer);
+        Department ITDe =
+                company.getOrCreateDepartment(DepartmentDefaultType.IT.toString());
+        ITDe.addPerson(developer);
+        return developer;
+    }
+
+    public static Manager generateManagerAndAddManagerToDepartment(Company company) {
+        Department randomDep =
+                new PrecreatedDepartment(DepartmentDefaultType.getRandomDepartment());
+        company.departments.add(randomDep);
+        Manager newManager = Manager.generate();
+        randomDep.addPerson(newManager);
+        return newManager;
+    }
+
+    public static OfficeEmployee generateOfficeEmployeeAndAddOfficeEmployeeToNonITDepartment(Company company) {
+        Department randomDep;
+        List<Department> nonITDepartments = company.getNonITDepartments();
+        if (!nonITDepartments.isEmpty()) {
+            randomDep = nonITDepartments.get(new Random().nextInt(nonITDepartments.size()));
+        } else {
+            randomDep = new CustomDepartment(DepartmentDefaultType.HUMAN_RESOURCES.toString());
+        }
+        OfficeEmployee newOfficeEmployee = OfficeEmployee.generate();
+        randomDep.addPerson(newOfficeEmployee);
+        return newOfficeEmployee;
+    }
+
     private static Department getSelectedDepartmentToAddObj(Company company) {
         Menu.selectDepartmentToAddObjOptions choice =
                 InputUtilities.selectFromList("Would you like to add a new developer to:",
