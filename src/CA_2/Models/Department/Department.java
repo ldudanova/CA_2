@@ -37,7 +37,6 @@ public abstract class Department {
                 Developer developer = this.developers.get(i);
                 developer.print(i + 1, indent + "  ");
             }
-            System.out.println();
         }
 
         //Print list of office employees
@@ -49,8 +48,8 @@ public abstract class Department {
                 OfficeEmployee officeEmployee = this.officeEmployees.get(i);
                 officeEmployee.print(i + 1, indent + "  ");
             }
-            System.out.println();
         }
+        System.out.println();
     }
 
     // List of department's employees
@@ -67,7 +66,7 @@ public abstract class Department {
 
     @Override
     public String toString() {
-        return getName() + (getType() == DepartmentBaseType.CUSTOM ? " (Custom)" : "");
+        return getName();
     }
 
     public ArrayList<Developer> getDevelopers() {

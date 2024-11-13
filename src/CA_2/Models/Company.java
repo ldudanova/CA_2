@@ -2,6 +2,8 @@ package CA_2.Models;
 
 import CA_2.Models.Department.CustomDepartment;
 import CA_2.Models.Department.Department;
+import CA_2.Models.Department.DepartmentDefaultType;
+import CA_2.Models.Department.PrecreatedDepartment;
 import CA_2.Utils.Generator;
 import CA_2.Utils.Helper;
 import CA_2.Utils.Store;
@@ -93,29 +95,33 @@ public class Company {
 
         boolean isUniqueName = false;
 
-        while (!isUniqueName) {
-            for (int i = 0; i < Store.companies.size(); i++) {
-                if (Store.companies.get(i)
-                        .getName()
-                        .equalsIgnoreCase(name)) {
-                    name = generateName();
-                } else {
-                    isUniqueName = true;
+        if (!Store.companies.isEmpty()) {
+            while (!isUniqueName) {
+                for (int i = 0; i < Store.companies.size(); i++) {
+                    if (Store.companies.get(i)
+                            .getName()
+                            .equalsIgnoreCase(name)) {
+                        name = generateName();
+                        isUniqueName = false;
+                        break;
+                    } else {
+                        isUniqueName = true;
+                    }
                 }
             }
         }
 
         Company newCompany = new Company(name);
-        int randomNumber = new Random().nextInt((10 - 1) + 1) + 1;
+        int randomNumber = new Random().nextInt(10) + 1;
 
-            for (int i = 0; i <= randomNumber; i++) {
-                //Generate developer
-                Helper.generateDeveloperAndAddDeveloperToITDepartment(newCompany);
-                //Generate dep and manager
-                Helper.generateManagerAndAddManagerToDepartment(newCompany);
-                //Generate nonITDep and Office employee
-                Helper.generateOfficeEmployeeAndAddOfficeEmployeeToNonITDepartment(newCompany);
-            }
+        for (int i = 0; i <= randomNumber; i++) {
+            //Generate developer
+            Helper.generateDeveloperAndAddDeveloperToITDepartment(newCompany);
+            //Generate dep and manager
+            Helper.generateManagerAndAddManagerToDepartment(newCompany);
+            //Generate nonITDep and Office employee
+            Helper.generateOfficeEmployeeAndAddOfficeEmployeeToNonITDepartment(newCompany);
+        }
 
         return newCompany;
     }
@@ -199,8 +205,22 @@ public class Company {
                     .equalsIgnoreCase(departmentName)) {
                 return department;
             }
+
         }
         Department resDepartment = new CustomDepartment(departmentName);
+        this.departments.add(resDepartment);
+        return resDepartment;
+    }
+
+    public Department getOrCreateDepartment(DepartmentDefaultType departmentType) {
+        for (Department department : this.departments) {
+            if (department
+                    .getName()
+                    .equalsIgnoreCase(departmentType.toString())) {
+                return department;
+            }
+        }
+        Department resDepartment = new PrecreatedDepartment(departmentType);
         this.departments.add(resDepartment);
         return resDepartment;
     }
@@ -208,7 +228,7 @@ public class Company {
     public List<Department> getNonITDepartments() {
         return this.departments
                 .stream()
-                .filter(department -> !department.getName().equalsIgnoreCase("IT"))
+                .filter(department -> !department.getName().equalsIgnoreCase(DepartmentDefaultType.IT.toString()))
                 .collect(Collectors.toList());
     }
 

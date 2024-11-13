@@ -33,14 +33,14 @@ public class Developer extends Employee {
     @Override
     public String toString() {
         // Call parent's toString method and add player specific values
-        return super.toString() + "; Type: " + developerType;
+        return super.toString() + ", " + developerType;
     }
 
     /**
      *
      */
     public void print(int index, String indent) {
-        System.out.println("  "+indent + index+") " + super.toString() + ", " + developerType);
+        System.out.println("  "+indent + index+") " + this);
     }
 
     /**

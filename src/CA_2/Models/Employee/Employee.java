@@ -21,7 +21,7 @@ public class Employee extends Person {
     @Override
     public String toString() {
         return super.toString()
-                + ", email: " + (email == null ? "not set" : email)
+                + ", " + (email == null ? "email not set" : email)
                 + ", Salary: " + salary
                 + ", " + position;
 

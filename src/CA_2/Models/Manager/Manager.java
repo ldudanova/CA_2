@@ -37,7 +37,7 @@ public class Manager extends Person {
      */
     @Override
     public String toString() {
-        return super.toString() + ", " + managerType;
+        return super.toString() + ", " + email + ", Salary: " + salary + ", " + managerType;
     }
 
     /**
@@ -49,11 +49,7 @@ public class Manager extends Person {
                         + "  "
                         + index
                         + ") "
-                        + super.toString()
-                        + ", "
-                        + managerType
-                        + ", "
-                        + this.email
+                        + this
         );
     }
 

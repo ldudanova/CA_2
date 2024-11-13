@@ -175,8 +175,9 @@ public class Generator {
      * @return
      */
     private static double generateRandomDouble(int min, int max) {
+        double diff = (max - min) / 10.00;
         Random random = new Random();
-        return max + (min * random.nextDouble());
+        return min + diff * random.nextInt(10);
     }
 
 }

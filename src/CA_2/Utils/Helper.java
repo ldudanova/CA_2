@@ -151,15 +151,15 @@ public class Helper {
 
         do {
             if (canAddManager(selectedDepartment, managerType)) {
+                // Input gender
+                Gender gender = selectFromList("* Select the gender:  (* - required)", Gender.class);
                 // Input first name
                 String firstName = askUserForWord("* Enter manager's first name:");
                 // Input last name
                 String lastName = askUserForWord("* Enter manager's last name:");
-                // Input gender
-                Gender gender = selectFromList("* Select the gender:  (* - required)", Gender.class);
                 // Input email
                 String email = askUserForEmail("Enter manager's email:");
-                double salary = askUserForDouble("Enter manager's salary:");
+                double salary = askUserForDouble("* Enter manager's salary:");
                 Manager newManager = new Manager(firstName, lastName, email, gender, salary, managerType);
                 selectedDepartment.managers.add(newManager);
                 System.out.println("Manager \"" + managerType + "\" has been added to the department " + selectedDepartment.getName());
@@ -181,7 +181,6 @@ public class Helper {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -195,7 +194,6 @@ public class Helper {
                 }
             }
         }
-
         return result;
     }
 
@@ -203,83 +201,54 @@ public class Helper {
     /**
      * Method for input all data for creating a developer
      */
-    public static Developer addDeveloper(Company company) {
+    public static void addDeveloper(Company company) {
         //Select department to add a new developer
         Department selectedDepartment = getSelectedDepartmentToAddObj(company);
 
-        DeveloperType developerType = selectFromList("* Select developer's type", DeveloperType.class);
-
-        List<EmployeePosition> availableEmployeePositions = getAvailableEmployeePositions(selectedDepartment);
+        DeveloperType developerType = selectFromList("* Select developer's type    (* - required)", DeveloperType.class);
 
         // Select employee position
         EmployeePosition developerPosition = selectFromList("* Select developer's position",
-                availableEmployeePositions.toArray(new EmployeePosition[0]),
-                EmployeePosition::toString);
+                EmployeePosition.class);
 
-        do {
-            if (canAddDeveloper(selectedDepartment, developerPosition)) {
-                // Input first name
-                String firstName = askUserForWord("* Enter developer's first name:");
-                // Input last name
-                String lastName = askUserForWord("* Enter developer's last name:");
-                // Input gender
-                Gender gender = selectFromList("* Select the gender:  (* - required)", Gender.class);
-                // Input email name
-                String email = askUserForEmail("Enter developer's email:");
-                double salary = askUserForDouble("Enter developer's salary:");
-                Developer newDeveloper = new Developer(
-                        firstName,
-                        lastName,
-                        email,
-                        gender,
-                        salary,
-                        developerPosition,
-                        developerType);
-                selectedDepartment.developers.add(newDeveloper);
-                System.out.println(
-                        "Developer \n"
-                                + newDeveloper
-                                + "\n has been added to the department "
-                                + selectedDepartment.getName()
-                );
-
-                return newDeveloper;
-            }
-
-            System.err.println(
-                    "Developer \""
-                            + developerPosition
-                            + "\" already exists"
-            );
-            System.err.println("try again");
-
-        } while (true);
+        // Input gender
+        Gender gender = selectFromList("* Select the gender: ", Gender.class);
+        // Input first name
+        String firstName = askUserForWord("* Enter developer's first name:");
+        // Input last name
+        String lastName = askUserForWord("* Enter developer's last name:");
+        // Input email name
+        String email = askUserForEmail("Enter developer's email:");
+        double salary = askUserForDouble("* Enter developer's salary:");
+        Developer newDeveloper = new Developer(
+                firstName,
+                lastName,
+                email,
+                gender,
+                salary,
+                developerPosition,
+                developerType);
+        selectedDepartment.developers.add(newDeveloper);
+        System.out.println(
+                "Developer \n"
+                        + newDeveloper
+                        + "\n has been added to the department "
+                        + selectedDepartment.getName()
+        );
     }
 
-    public static boolean canAddDeveloper(Department department, EmployeePosition newEmployeePosition) {
-        for (Developer developer : department.developers) {
-            if (developer.position.equals(newEmployeePosition)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public static List<EmployeePosition> getAvailableEmployeePositions(Department department) {
-        ArrayList<EmployeePosition> result = new ArrayList<>(Arrays.asList(EmployeePosition.values()));
-
-        for (Developer developer : department.developers) {
-            for (EmployeePosition ep : EmployeePosition.values()) {
-                if (developer.position == ep) {
-                    result.remove((developer).position);
-                }
-            }
-        }
-
-        return result;
-    }
-
+    /**
+     * Method to build a Person object using data from the text file
+     *
+     * @param firstName
+     * @param lastName
+     * @param gender
+     * @param email
+     * @param salary
+     * @param position
+     * @param jobTitle
+     * @return
+     */
     public static Person buildPerson(String firstName,
                                      String lastName,
                                      Gender gender,
@@ -305,7 +274,6 @@ public class Helper {
             if (!isDev) {
                 officeEmployeeTitle = jobTitle.trim();
             }
-
         } else {
             ManagerType[] possibleManagerTypes = ManagerType.class.getEnumConstants();
 
@@ -314,10 +282,15 @@ public class Helper {
                     managerType = manType;
                 }
             }
+
+            if (managerType == null) {
+                throw new RuntimeException("Unknown job title for manager: " + jobTitle.trim());
+            }
         }
 
         if (managerType != null) {
-            return new Manager(firstName,
+            return new Manager(
+                    firstName,
                     lastName,
                     email,
                     gender,
@@ -327,7 +300,8 @@ public class Helper {
         }
 
         if (developerType != null) {
-            return new Developer(firstName,
+            return new Developer(
+                    firstName,
                     lastName,
                     email,
                     gender,
@@ -358,16 +332,15 @@ public class Helper {
     public static Developer generateDeveloperAndAddDeveloperToITDepartment(Company company) {
         Developer developer = Developer.generate(company.getName());
         Store.people.add(developer);
-        Department ITDe =
+        Department ITDep =
                 company.getOrCreateDepartment(DepartmentDefaultType.IT.toString());
-        ITDe.addPerson(developer);
+        ITDep.addPerson(developer);
         return developer;
     }
 
     public static Manager generateManagerAndAddManagerToDepartment(Company company) {
         Department randomDep =
-                new PrecreatedDepartment(DepartmentDefaultType.getRandomDepartment());
-        company.departments.add(randomDep);
+                company.getOrCreateDepartment(DepartmentDefaultType.getRandomDepartment());
         Manager newManager = Manager.generate(company.getName());
         randomDep.addPerson(newManager);
         return newManager;
@@ -379,7 +352,7 @@ public class Helper {
         if (!nonITDepartments.isEmpty()) {
             randomDep = nonITDepartments.get(new Random().nextInt(nonITDepartments.size()));
         } else {
-            randomDep = new CustomDepartment(DepartmentDefaultType.HUMAN_RESOURCES.toString());
+            randomDep = company.getOrCreateDepartment(DepartmentDefaultType.HUMAN_RESOURCES.toString());
         }
         OfficeEmployee newOfficeEmployee = OfficeEmployee.generate(company.getName());
         randomDep.addPerson(newOfficeEmployee);

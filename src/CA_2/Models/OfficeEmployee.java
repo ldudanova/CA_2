@@ -26,14 +26,14 @@ public class OfficeEmployee extends Employee {
     @Override
     public String toString() {
         // Call parent's toString method and add player specific values
-        return super.toString() + ", position: " + position;
+        return super.toString() + ", " + title;
     }
 
     /**
      *
      */
     public void print(int index, String indent) {
-        System.out.println("  " + indent + index+") " + super.toString() + ", " + title);
+        System.out.println("  " + indent + index+") " + this);
     }
 
     /**
