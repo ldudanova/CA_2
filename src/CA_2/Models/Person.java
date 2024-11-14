@@ -4,34 +4,59 @@ package CA_2.Models;
  * Class representing a person within the company.
  *
  * The `Person` class serves as a foundational model for managing information about individuals
- * associated with the company, including employees, managers, and possibly clients. This class
- * defines common attributes like first name, last name, email, and gender, which are essential
- * for storing and displaying basic personal information. By implementing `Comparable`, this class
- * allows for sorting operations on lists of people, which is valuable for organizing and managing
- * employee records in a structured way.
+ * associated with the company, including office employees, managers, and developers.
+ * This class defines common attributes like first name, last name, email, and gender, which are essential
+ * for storing and displaying basic personal information.
+ * By implementing `Comparable`, it enables sorting,
+ * which is beneficial for managing lists of individuals in a structured order.
  */
 public class Person implements Comparable<Person> {
 
-    // Variable for the person's first name, enabling identification and personalization
-    public String firstName;
+     /**
+     * Stores the person's first name, which is final as it should not change after the Person is created.
+     * Declared private to prevent direct external modification, ensuring data consistency.
+     * It is accessed via the public getFirstName() method.
+     */
+    private final String firstName;
 
-    // Variable for the person's last name, essential for identification and differentiation
-    public String lastName;
+    /**
+     * Stores the person's last name, which is final as it should not change after the Person is created.
+     * Declared private to prevent direct external modification, ensuring data consistency.
+     * It is accessed via the public getLastName() method.
+     */
+    private final String lastName;
 
-    // Variable for the person's email, used for contact information and communication purposes
-//    public String email;
+    /**
+     * Enum variable for the person's gender, which is final as it should not change after the Person is created.
+     * Declared private to prevent direct external modification, ensuring data consistency.
+     * It is accessed via the public getGender() method.
+     */
+    private final Gender gender;
 
-    // Enum variable for the person's gender, supporting consistent and standardized gender data
-    public Gender gender;
-
+    //START Class getters
+    /**
+     * Retrieves the first name of the person.
+     *
+     * @return the person's first name.
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Retrieves the last name of the person.
+     *
+     * @return the person's last name.
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Retrieves the gender of the person.
+     *
+     * @return the person's gender.
+     */
     public Gender getGender() {
         return gender;
     }
@@ -40,13 +65,12 @@ public class Person implements Comparable<Person> {
      * Constructor for creating a `Person` object.
      *
      * This constructor initializes the `Person` object with the provided first name, last name,
-     * email, and gender values. By defining these fields at the time of instantiation, we ensure
+     * and gender values. By defining these fields at the time of instantiation, we ensure
      * that all `Person` objects carry essential, identifiable information. This is particularly useful
      * for managing employee records where accurate personal data is needed for effective HR processes.
      *
      * @param firstName Person's first name
      * @param lastName Person's last name
-//     * @param email Person's email address
      * @param gender Person's gender
      */
     public Person(String firstName, String lastName, Gender gender) {
@@ -60,11 +84,11 @@ public class Person implements Comparable<Person> {
      * Provides a string representation of the `Person` object.
      *
      * This `toString` method is overridden to return a readable string representation of the
-     * `Person` object, combining the first name, last name, class type, email, and gender.
+     * `Person` object, combining the first name, last name, class type, and gender.
      * The string format improves user interface readability by providing clear details on each person
-     * in the program. This is especially useful when displaying employee information in lists or logs.
+     * in the program. This is especially useful when displaying employee information in lists.
      *
-     * @return A formatted string containing the `Person`'s first name, last name, email, and gender
+     * @return A formatted string containing the `Person`'s first name, last name, and gender
      */
     @Override
     public String toString() {

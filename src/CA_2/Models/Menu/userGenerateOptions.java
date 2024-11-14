@@ -9,7 +9,9 @@ public enum userGenerateOptions {
     DEVELOPER("Developer"),
     // Option to generate a Manager.
     MANAGER("Manager"),
+    // Option to generate an Office employee.
     OFFICE_EMPLOYEE("Office employee"),
+    // Option to generate a Company
     COMPANY("Company");
 
     // String label that holds the display name for each user input option.

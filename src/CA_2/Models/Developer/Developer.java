@@ -6,16 +6,35 @@ import CA_2.Models.Gender;
 import CA_2.Utils.Generator;
 
 /**
- * Class for storing employee specified information
- * Inherited from Person class
+ * The Developer class represents a specific type of employee in the IT field, with additional attributes.
+ *
+ * This class extends the Employee class by adding a developer-specific field, `DeveloperType`, to categorize developers
+ * by their area of expertise (e.g., Backend, Frontend).
+ * It provides additional methods for generating developer data
+ * and printing developer details.
  */
 
 public class Developer extends Employee {
 
-    // Variable for employee position: value is one of EmployeeType enum values
-    public DeveloperType developerType;
+    /**
+     * Represents the developer's specialty, such as FRONTEND, BACKEND, or MOBILE.
+     */
+    private final DeveloperType developerType;
 
-    // Constructor
+    /**
+     * Constructor for creating a Developer instance with specified attributes.
+     *
+     * This constructor initializes the developer's details, including name, email, position, and specialization.
+     * It is used to define a new Developer object and categorize it under a specific DeveloperType.
+     *
+     * @param firstName     The developer's first name.
+     * @param lastName      The developer's last name.
+     * @param email         The developer's email.
+     * @param gender        The developer's gender.
+     * @param salary        The developer's salary.
+     * @param position      The position level of the developer.
+     * @param developerType The specific area of expertise of the developer.
+     */
     public Developer(String firstName, String lastName, String email, Gender gender, double salary,
                      EmployeePosition position, DeveloperType developerType) {
 
@@ -26,9 +45,12 @@ public class Developer extends Employee {
     }
 
     /**
-     * Set the way how convert objects of Player type to string
+     * Provides a string representation of the Developer object.
      *
-     * @return String representation of Player object
+     * This method overrides the `toString` method to add the developer's type to the output,
+     * making it useful for displaying developer-specific details in reports.
+     *
+     * @return A string describing the developer's details and specialty.
      */
     @Override
     public String toString() {
@@ -37,16 +59,38 @@ public class Developer extends Employee {
     }
 
     /**
+     * Retrieves the DeveloperType of this developer.
      *
+     * This getter provides access to the developer's specialization, which can help in categorizing or
+     * filtering developers by their skills.
+     *
+     * @return The developer's specific DeveloperType.
      */
-    public void print(int index, String indent) {
-        System.out.println("  "+indent + index+") " + this);
+    public DeveloperType getDeveloperType() {
+        return developerType;
     }
 
     /**
-     * Method for generating Developer object with random but appropriate data
+     * Prints the developer's details with indentation and an index.
      *
-     * @return Generated Developer object
+     * This method formats and outputs the developer's information to the console. It is useful for displaying
+     * developer lists in an organized manner.
+     *
+     * @param index  The index of the developer in the list.
+     * @param indent The indentation string for formatting.
+     */
+    public void print(int index, String indent) {
+        System.out.println("  " + indent + index + ") " + this);
+    }
+
+    /**
+     * Generates a new Developer object with random attributes.
+     *
+     * This static method uses the Generator utility to create a Developer with randomly assigned attributes,
+     * making it useful for testing or populating a dataset with varied developer information.
+     *
+     * @param companyName The name of the company, used to generate a company-specific email.
+     * @return A Developer instance with randomly generated values.
      */
     public static Developer generate(String companyName) {
         // Randomly choose the gender

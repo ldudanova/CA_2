@@ -64,7 +64,7 @@ public class Helper {
 
                     if (canAddDepartment(company, departmentName)) {
                         Department resDep = new CustomDepartment(departmentName);
-                        company.departments.add(resDep);
+                        company.getDepartments().add(resDep);
                         System.out.println("Department \"" + departmentName + "\" has been added to company " + company.getName());
 
                         return resDep;
@@ -81,7 +81,7 @@ public class Helper {
 
                 if (canAddDepartment(company, departmentName)) {
                     Department resDep = new PrecreatedDepartment(availableDepartments.get(index));
-                    company.departments.add(resDep);
+                    company.getDepartments().add(resDep);
                     System.out.println("Department \"" + departmentName + "\" has been added to company " + company.getName());
 
                     return resDep;
@@ -95,7 +95,7 @@ public class Helper {
     }
 
     public static boolean canAddDepartment(Company company, String newDepartmentName) {
-        for (Department dep : company.departments) {
+        for (Department dep : company.getDepartments()) {
             if (dep.getName().equals(newDepartmentName)) {
                 return false;
             }
@@ -107,7 +107,7 @@ public class Helper {
     public static List<DepartmentDefaultType> getAvailableDepartments(Company company) {
         ArrayList<DepartmentDefaultType> result = new ArrayList<>(Arrays.asList(DepartmentDefaultType.values()));
 
-        for (Department dep : company.departments) {
+        for (Department dep : company.getDepartments()) {
             if (dep.getType() == DepartmentBaseType.DEFAULT) {
                 result.remove(((PrecreatedDepartment) dep).GetSelectedDepartment());
             }
@@ -116,24 +116,6 @@ public class Helper {
         return result;
     }
 
-/*    public static void printCompany(Company company) {
-
-        System.out.println("\n========= Printing the company ===========");
-
-        System.out.println("Company name: " + company.getName());
-
-        if (company.departments.isEmpty()) {
-            System.out.println("Company doesn't have any department");
-        } else {
-            System.out.println("Departments:");
-            int i = 1;
-            for (Department dep : company.departments) {
-                System.out.println(" " + i++ + ") " + dep);
-            }
-        }
-
-        System.out.println("============= End of print ===============\n");
-    }*/
 
     /**
      * Method for input all data for creating a manager
@@ -161,7 +143,7 @@ public class Helper {
                 String email = askUserForEmail("Enter manager's email:");
                 double salary = askUserForDouble("* Enter manager's salary:");
                 Manager newManager = new Manager(firstName, lastName, email, gender, salary, managerType);
-                selectedDepartment.managers.add(newManager);
+                selectedDepartment.getManagers().add(newManager);
                 System.out.println("Manager \"" + managerType + "\" has been added to the department " + selectedDepartment.getName());
 
                 return;
@@ -176,8 +158,8 @@ public class Helper {
     }
 
     public static boolean canAddManager(Department department, ManagerType newManagerType) {
-        for (Manager manager : department.managers) {
-            if (manager.managerType.equals(newManagerType)) {
+        for (Manager manager : department.getManagers()) {
+            if (manager.getManagerType().equals(newManagerType)) {
                 return false;
             }
         }
@@ -187,10 +169,10 @@ public class Helper {
     public static List<ManagerType> getAvailableManagerTypes(Department department) {
         ArrayList<ManagerType> result = new ArrayList<>(Arrays.asList(ManagerType.values()));
 
-        for (Manager manager : department.managers) {
+        for (Manager manager : department.getManagers()) {
             for (ManagerType mt : ManagerType.values()) {
-                if (manager.managerType == mt) {
-                    result.remove((manager).managerType);
+                if (manager.getManagerType() == mt) {
+                    result.remove((manager).getManagerType());
                 }
             }
         }
@@ -228,7 +210,7 @@ public class Helper {
                 salary,
                 developerPosition,
                 developerType);
-        selectedDepartment.developers.add(newDeveloper);
+        selectedDepartment.getDevelopers().add(newDeveloper);
         System.out.println(
                 "Developer \n"
                         + newDeveloper
@@ -366,14 +348,14 @@ public class Helper {
 
         switch (choice) {
             case EXISTING: {
-                List<Department> departments = company.departments;
+                List<Department> departments = company.getDepartments();
 
                 if (departments.isEmpty()) {
                     System.out.println("There's no existing departments. Create a new department");
                     return addDepartment(company);
                 } else {
                     return InputUtilities.selectFromList("\nSelect a department from the list: ",
-                            company.departments.toArray(new Department[0]), Department::getName);
+                            company.getDepartments().toArray(new Department[0]), Department::getName);
                 }
             }
             case NEW:

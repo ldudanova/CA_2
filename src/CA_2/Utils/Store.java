@@ -58,7 +58,7 @@ public class Store {
      * - Acts as the main storage for `Person` objects, allowing program-wide access to employee and
      * manager data. This simplifies tasks related to employee management, such as searching for
      * specific people or managing roles within departments.
-     * <p>
+     *
      * Usage:
      * - Used throughout the program when retrieving employee data for tasks like sorting, searching,
      * and displaying employee lists.
@@ -70,35 +70,13 @@ public class Store {
      * Purpose:
      * - Stores department data, enabling efficient department management within the program. This
      * includes department retrieval, adding or removing departments, and assigning employees.
-     * <p>
+     *
      * Usage:
      * - Accessed by functions that handle department-specific operations, such as assigning employees
      * to a department or generating department reports.
      */
     public static ArrayList<Department> departments = new ArrayList<>();
 
-    /**
-     * Converts the ArrayList of departments into a fixed-size array of DepartmentBase objects.
-     * <p>
-     * Purpose:
-     * - Converts the dynamic list of departments into a fixed-size array, which may be required by
-     * certain functions or libraries that only accept arrays.
-     * <p>
-     * Usage:
-     * - Useful when exporting department data or interacting with specific program components that
-     * require an array structure. This function provides compatibility with operations where
-     * ArrayLists may not be suitable.
-     *
-     * @return an array of DepartmentBase objects representing all departments currently stored in the ArrayList.
-     */
-    public static Department[] getDepartmentArray() {
-        // Initialize a new array of DepartmentBase with the size of the departments list
-        Department[] array = new Department[departments.size()];
 
-        // Convert the departments ArrayList into an array and store it in 'array'
-        array = departments.toArray(array);
 
-        // Return the array of departments
-        return array;
-    }
 }

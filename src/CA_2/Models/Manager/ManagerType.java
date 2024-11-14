@@ -1,7 +1,11 @@
 package CA_2.Models.Manager;
 
 /**
- * Enum with manager type values
+ * The ManagerType enum defines the types of managerial roles within the company.
+ *
+ * This enum is used for specifying the type of manager, helping differentiate between various managerial roles
+ * such as Head Managers and Team Leads. It allows for more structured management hierarchy
+ * and simplifies classification in employee data.
  */
 public enum ManagerType {
     HEAD_MANAGER,

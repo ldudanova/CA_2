@@ -76,17 +76,17 @@ public class SortAndSearchOperations {
         // Loop through each person in the provided list
         for (Person person : people) {
             // Check if the search pattern matches the person's first name (ignoring case)
-            if (person.firstName.equalsIgnoreCase(searchPattern)) {
+            if (person.getFirstName().equalsIgnoreCase(searchPattern)) {
                 // If it matches, add this person to the result list
                 result.add(person);
             }
             // Check if the search pattern matches the person's last name (ignoring case)
-            else if (person.lastName.equalsIgnoreCase(searchPattern)) {
+            else if (person.getLastName().equalsIgnoreCase(searchPattern)) {
                 // If it matches, add this person to the result list
                 result.add(person);
             }
             // Check if the search pattern matches the full name (first + " " + last) (ignoring case)
-            else if ((person.firstName + " " + person.lastName).equalsIgnoreCase(searchPattern)) {
+            else if ((person.getFirstName() + " " + person.getLastName()).equalsIgnoreCase(searchPattern)) {
                 // If it matches, add this person to the result list
                 result.add(person);
             }
@@ -100,7 +100,7 @@ public class SortAndSearchOperations {
         List<PersonSearchResult> results = new ArrayList<>();
 
         for (Company company : Store.companies) {
-            for (Department department : company.departments) {
+            for (Department department : company.getDepartments()) {
                 for (Person person : linearSearchPeople(department.getAllPeople(), searchPattern)) {
                     PersonSearchResult personResult = new PersonSearchResult();
                     personResult.company = company;
@@ -124,7 +124,7 @@ public class SortAndSearchOperations {
      */
     public static Company findCompanyByName(String name) {
         for (Company company : Store.companies) {
-            if (company.name.equalsIgnoreCase(name)) { // Case-insensitive comparison
+            if (company.getName().equalsIgnoreCase(name)) { // Case-insensitive comparison
                 return company;
             }
         }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Printer {
     /**
      *
+     * @param companies
      */
     public static void printCompanyNames(ArrayList<Company> companies) {
         if (companies == null || companies.isEmpty()) {
@@ -30,6 +31,7 @@ public class Printer {
 
     /**
      *
+     * @param companies
      */
     public static void printCompaniesData(ArrayList<Company> companies) {
         if (companies == null || companies.isEmpty()) {
@@ -44,29 +46,6 @@ public class Printer {
             // Print each company’s information on a new line with a number
             // (e.g., "1) Company details here")
             companies.get(i).print(i+1, " ");
-        }
-    }
-
-    /**
-     * Method to print a list of people or their subclasses.
-     *
-     * @param people List of people to print.
-     */
-    public static void printPeople(ArrayList<Person> people) {
-        // Check if the list is null or empty
-        // If there are no people in the list, display a message and exit the method
-        if (people == null || people.isEmpty()) {
-            // Print "No data" message if the list is empty
-            System.out.println("* No data *");
-            // Exit the method, as there's nothing to print
-            return;
-        }
-
-        // Loop through each person in the list
-        for (int i = 0; i < people.size(); i++) {
-            // Print each person’s information on a new line with a number
-            // (e.g., "1) Person details here")
-            System.out.println((i + 1) + ") " + people.get(i).toString());
         }
     }
 

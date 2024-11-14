@@ -7,14 +7,13 @@ import CA_2.Models.Menu.*;
 import CA_2.Utils.Helper;
 import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
+import static CA_2.Utils.InputUtilities.*;
+import static CA_2.Utils.Helper.getRandomOrGeneratedCompany;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
-import static CA_2.Utils.InputUtilities.*;
-import static CA_2.Utils.Helper.getRandomOrGeneratedCompany;
 
 /**
  * Class for displaying a menu and asking the user for their choice.
@@ -139,7 +138,7 @@ public class Menu {
                     }
                     Company selectedCompany = selectFromList("Select a company where to add a new object: ",
                             Store.companies.toArray(new Company[0]), Company::getName);
-                    System.out.println("selectedCompany: " + selectedCompany.name);
+                    System.out.println("selectedCompany: " + selectedCompany.getName());
 
                     // Asking for type of object to create
                     userInputOptions inputOption =
@@ -212,7 +211,7 @@ public class Menu {
                         case COMPANY: {
                             Company newCompany = Company.generate();
                             Store.companies.add(newCompany);
-                            System.out.println("The company has been added: " + newCompany.name);
+                            System.out.println("The company has been added: " + newCompany.getName());
                             break;
                         }
                     }
@@ -226,7 +225,7 @@ public class Menu {
                                     printingType.class);
 
                     switch (printingOption) {
-                        //
+                        // Printing all data from Store.companies
                         case ALL_COMPANIES: {
                             Printer.printCompaniesData(Store.companies);
                             break;
