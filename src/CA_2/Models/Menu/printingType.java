@@ -5,9 +5,7 @@ package CA_2.Models.Menu;
  * This enum allows the user to specify a particular type of data to display.
  */
 public enum printingType {
-    //
     ALL_COMPANIES("All companies"),
-    // Option to print all people (both employees and managers).
     ALL_PEOPLE("All people");
 
     // String label that holds the display name for each printing option.

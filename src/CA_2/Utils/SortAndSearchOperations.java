@@ -96,6 +96,15 @@ public class SortAndSearchOperations {
         return result;
     }
 
+    /**
+     * Finds an employee by his or her name or/and surname.
+     *
+     * Usage:
+     * - When it is needed to find an employee by his or her name.
+     *
+     * @param searchPattern first name or last name or full name
+     * @return The list of people who match the query.
+     */
     public static List<PersonSearchResult> findEmployeesDataByName(String searchPattern) {
         List<PersonSearchResult> results = new ArrayList<>();
 

@@ -7,6 +7,7 @@ import CA_2.Models.Menu.*;
 import CA_2.Utils.Helper;
 import CA_2.Utils.SortAndSearchOperations;
 import CA_2.Utils.Store;
+
 import static CA_2.Utils.InputUtilities.*;
 import static CA_2.Utils.Helper.getRandomOrGeneratedCompany;
 
@@ -14,14 +15,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 /**
- * Class for displaying a menu and asking the user for their choice.
+ * The Menu class provides a user interface that allows you to interact with employee,
+ * company, and system management.
+ * The class contains methods for displaying a list of options,
+ * accepting user input, and performing actions based on user selections.
+ * <p>
+ * This class is the primary entry point for the user to access various system functionality,
+ * including creating, displaying, searching, and sorting employees, departments, and companies.
+
+ * <h2>Use Examples</h2>.
+ * <p>Examples of menu actions:
+ * <ul>
+ * <li>Create a new company or generate a random company</li>
+ * <li>Display a list of all companies or employees</li>
+ * <li>Sort and search employees by first and/or last name</li>
+ * <li>Search a company by name and then display its departments and employees</li>
+ * <li>Add employees to specific departments</li>
+ * <li>Generate random employees and departments</li>
+ * </ul>
  */
 public class Menu {
     /**
-     * Method for starting a menu loop, asking for user input, and performing actions
-     */
+     * This method initiates a menu loop where the user can select different options.
+     * This call allows the user to create custom of generated companies,
+     * display various created objects, sorting employees etc.
+     *
+     * <h3>Workflow:</h3>
+     * <ul>
+     * <li>The menu loop starts and prompts the user for input.</li>
+     * <li>The chosen action is processed by calling relevant methods and performing operations
+     * such as company creation, employee sorting, data generation, and printing.</li>
+     * <li>The loop continues until the user selects the "EXIT" option, which terminates the menu.</li>
+     * </ul>
+     *
+     * This method is especially useful for users who need to manage company data in a structured
+     * and interactive way. The user can be represented by HR managers,
+     * IT administrators, or developers working on data management tools.
+     **/
     public static void showMenu() {
 
         // Flag to control the exit from the menu loop

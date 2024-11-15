@@ -5,9 +5,7 @@ package CA_2.Models.Menu;
  * This enum represents the different choices available to the user in the main menu.
  */
 public enum menuOptions {
-    //
     CREATE_COMPANY("Create a company"),
-    //
     SHOW_COMPANIES_LIST("Show the list of existing companies"),
     // Option to sort a predefined list of people.
     SORT("Sort a Dummy List of People"),

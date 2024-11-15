@@ -14,13 +14,14 @@ public class Reader {
     /**
      * Reads data from a specified file and returns a list of `Person` objects.
      * <p>
-     * The `readFile` method prompts the user for a file name and reads data from that file to create
+     * The `readFile` method asks the user to input a file name and then reads data from the entered file to create
      * an `ArrayList` of `Person` objects. This method is designed to provide a structured way of
-     * importing employee or applicant data, which is especially useful for companies looking to
-     * integrate bulk data management into their application. By centralizing the file reading process
-     * in this class, the program achieves a single point of data input, making future updates to file
-     * handling simpler and more efficient. Additionally, it ensures that data is read, parsed, and
-     * formatted consistently, which is critical for maintaining data integrity across the application.
+     * importing employee or applicant data. It is useful for companies that are looking to
+     * integrate bulk data about employees into their application.
+     * Thanks to this class the program achieves a single point of data input.
+     * It simplifies future updates and makes them more efficient.
+     * The class ensures that data is read, parsed, and formatted consistently.
+     * The class and its methods helps to maintain data across the application.
      * <p>
      * Use Cases:
      * - **HR Staff**: This method can be valuable for HR staff or administrative users who need to
@@ -28,14 +29,12 @@ public class Reader {
      * drive, data from applicants could be saved to a text file and then uploaded to the system
      * without manual data entry.
      * - **IT Department**: IT staff responsible for maintaining employee databases may also use this
-     * method for bulk uploads, helping to streamline onboarding or periodic data updates.
+     * method for uploads.
      * <p>
      * Importance:
-     * - This class plays an essential role in the program’s architecture by enabling automated data import.
-     * - Reduces the potential for manual errors and ensures that large datasets can be quickly added to the
-     * system, enhancing both speed and reliability in data management.
-     * - The `Reader` class is designed to handle common file input challenges such as missing or
-     * improperly formatted data, improving program robustness and user experience.
+     * - Enables automated data import.
+     * - Reduces the potential errors when the data is entered manually
+     * - Ensures that large datasets can be quickly added to the system.
      *
      * @return ArrayList of `Person` objects containing data read from the file.
      */

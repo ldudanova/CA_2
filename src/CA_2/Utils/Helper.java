@@ -19,6 +19,14 @@ import static CA_2.Utils.InputUtilities.*;
 import static CA_2.Utils.InputUtilities.selectFromList;
 
 public class Helper {
+    /**
+     * Method adds a new department to the company.
+     * The user chooses between creating a new department or adding an existing department.
+     * If a new department is selected, the user enters its name.
+     * If the department already exists, it can't be added.
+     * @param company a company to add a new department
+     * @return an added department
+     */
     public static Department addDepartment(Company company) {
 
         int selectedValue = -1;
@@ -94,6 +102,17 @@ public class Helper {
         } while (true);
     }
 
+    /**
+     * Checks if it is possible to add a department with the given name.
+     * Returns `false` if a department with this name already exists.
+     *
+     * This method helps to avoid duplicate departments,
+     * keeping a clear and concise list of objects without confusion.
+     *
+     * @param company company to add a department
+     * @param newDepartmentName the name of an adding department
+     * @return boolean value
+     */
     public static boolean canAddDepartment(Company company, String newDepartmentName) {
         for (Department dep : company.getDepartments()) {
             if (dep.getName().equals(newDepartmentName)) {
@@ -104,6 +123,14 @@ public class Helper {
         return true;
     }
 
+    /**
+     * Returns a list of available standard departments from the enum list
+     * DepartmentBaseType that have not yet been added to the company.
+     * Department names added to the company are removed from the list of available departments to select.
+     *
+     * @param company company to add a department
+     * @return list of names of the default departments
+     */
     public static List<DepartmentDefaultType> getAvailableDepartments(Company company) {
         ArrayList<DepartmentDefaultType> result = new ArrayList<>(Arrays.asList(DepartmentDefaultType.values()));
 
@@ -118,7 +145,10 @@ public class Helper {
 
 
     /**
-     * Method for input all data for creating a manager
+     * Allows the user to add a manager to the selected department.
+     * The user selects the type of manager, enters name, gender, email and salary.
+     * If the department already has a manager of that type, the addition is cancelled.
+     * This check is implemented using the method сanAddManager
      */
     public static void addManager(Company company) {
         //Select department to add a new manager
@@ -157,6 +187,16 @@ public class Helper {
         } while (true);
     }
 
+    /**
+     * Checks if a manager of the specified type can be added to the department.
+     * Returns `false` if a manager of this type already exists in the department.
+     * This method helps to avoid errors when adding a manager to a department on the user side.
+     * This method is used in the addManager.
+     *
+     * @param department department to add a manager
+     * @param newManagerType type of adding manager
+     * @return boolean value
+     */
     public static boolean canAddManager(Department department, ManagerType newManagerType) {
         for (Manager manager : department.getManagers()) {
             if (manager.getManagerType().equals(newManagerType)) {
@@ -166,6 +206,13 @@ public class Helper {
         return true;
     }
 
+    /**
+     * Returns a list of available manager types for the department,
+     * excluding those that are already occupied.
+     *
+     * @param department
+     * @return
+     */
     public static List<ManagerType> getAvailableManagerTypes(Department department) {
         ArrayList<ManagerType> result = new ArrayList<>(Arrays.asList(ManagerType.values()));
 
@@ -181,7 +228,10 @@ public class Helper {
 
 
     /**
-     * Method for input all data for creating a developer
+     * Method adds a developer to the selected department.
+     * The user selects the developer type, position, gender, enters name, email and salary.
+     * A developer object is then created and added to the department.
+     * @param company
      */
     public static void addDeveloper(Company company) {
         //Select department to add a new developer
@@ -220,7 +270,9 @@ public class Helper {
     }
 
     /**
-     * Method to build a Person object using data from the text file
+     * Method to build a Person object using data from the text file.
+     * Depending on the position, it can return developer, manager, or office employee.
+     * This method is used to collect the data from the text file.
      *
      * @param firstName
      * @param lastName
@@ -304,6 +356,11 @@ public class Helper {
         );
     }
 
+    /**
+     * Returns a random company from the `Store.companies` list.
+     * If there are no companies, creates a new one.
+     * @return
+     */
     public static Company getRandomOrGeneratedCompany() {
         if (Store.companies.isEmpty()) {
             Store.companies.add(Company.generate());
@@ -311,6 +368,13 @@ public class Helper {
         return Store.companies.get(new Random().nextInt(Store.companies.size()));
     }
 
+    /**
+     * Generates a developer and adds him to the company's IT department.
+     * If the IT department does not exist,the method creates it.
+     *
+     * @param company - company to add a new developer
+     * @return a generated developer
+     */
     public static Developer generateDeveloperAndAddDeveloperToITDepartment(Company company) {
         Developer developer = Developer.generate(company.getName());
         Store.people.add(developer);
@@ -320,6 +384,12 @@ public class Helper {
         return developer;
     }
 
+    /**
+     * Generates a manager and adds it to a random department of the company.
+     * If no department is found, a new one is created.
+     * @param company - company to add a new manager
+     * @return a generated manager
+     */
     public static Manager generateManagerAndAddManagerToDepartment(Company company) {
         Department randomDep =
                 company.getOrCreateDepartment(DepartmentDefaultType.getRandomDepartment());
@@ -328,6 +398,12 @@ public class Helper {
         return newManager;
     }
 
+    /**
+     * Generates an office employee and adds them to a random non-IT department.
+     * If there is no matching department, an office employee department is generated.
+     * @param company - company to add a new office employee
+     * @return a generated office employee
+     */
     public static OfficeEmployee generateOfficeEmployeeAndAddOfficeEmployeeToNonITDepartment(Company company) {
         Department randomDep;
         List<Department> nonITDepartments = company.getNonITDepartments();
@@ -341,6 +417,12 @@ public class Helper {
         return newOfficeEmployee;
     }
 
+    /**
+     * Selects or creates a department to add a new employee.
+     * The user chooses between an existing department and a new department.
+     * @param company where to select a department
+     * @return a department where then a user will add an employee
+     */
     private static Department getSelectedDepartmentToAddObj(Company company) {
         selectDepartmentToAddObjOptions choice =
                 InputUtilities.selectFromList("Would you like to add a new developer to:",

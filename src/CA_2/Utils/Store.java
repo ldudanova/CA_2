@@ -1,7 +1,6 @@
 package CA_2.Utils;
 
 // Importing the Company, DepartmentBase, and Person classes from the Models package
-
 import CA_2.Models.Company;
 import CA_2.Models.Department.Department;
 import CA_2.Models.Person;
@@ -10,32 +9,31 @@ import CA_2.Models.Person;
 import java.util.ArrayList;
 
 /**
- * The Store class acts as an in-memory data storage for managing the company's employees, departments,
- * and related information. Using a singleton-like design, this class provides centralized, static lists
- * that hold instances of Company, Person, and DepartmentBase, which can be accessed and modified
- * by other components within the program.
+ * Acts as a data warehouse for managing company employees, departments,
+ * and other related information.
+ * This class provides centralised static lists.
+ * that contain instances of the Company, Person, and DepartmentBase classes.
  * <p>
  * Purpose:
- * - Centralizes all data management within a single class, enabling consistent access across the program
- * without relying on an external database.
- * - Facilitates streamlined storage and retrieval of data for operations related to employee and department
- * management within the company's organizational structure.
+ * - Centralises all data management within a single class.
+ * - Provides consistent access to all data in a programme.
+ * - Provides organised storage of data.
+ * - Provides data retrieval for employee and department related transactions.
  * <p>
- * Usage:
- * - This class is critical for any functionality within the program that requires access to employees,
- * departments, or companies.
+ * Uses:
+ * - This class is important for programme functionality that requires access to employees, departments or companies.
  */
 public class Store {
 
     /**
-     * Static list to store instances of Company, representing all companies in memory.
+     * Static list for storing company instances, representing all companies in memory.
      * Purpose:
-     * - Centralizes storage for all `Company` objects, allowing quick access to the list of companies
-     * when performing company-related operations within the program.
+     * - Provides centralised storage of all objects of type `Company`.
+     * - Allows quick access to the list of companies when needed.
      * <p>
      * Usage:
-     * - Accessed by functions that need to retrieve or modify information about companies, such as
-     * assigning departments to a company or iterating over companies to generate reports.
+     * - Can be used when referring to functions,
+     * that need to access or modify company information.
      */
     public static ArrayList<Company> companies = new ArrayList<>();
 
@@ -53,30 +51,16 @@ public class Store {
     }
 
     /**
-     * Static list to store instances of Person, representing all employees and managers in memory.
+     * A static list to store in-memory Person instances that represent all employees and managers.
      * Purpose:
-     * - Acts as the main storage for `Person` objects, allowing program-wide access to employee and
-     * manager data. This simplifies tasks related to employee management, such as searching for
-     * specific people or managing roles within departments.
+     * - Acts as the primary storage for `Person` objects.
+     * - Provides access to employee and manager data.
+     * - Simplifies employee management tasks such as finding specific
+     * people or managing roles within departments.
      *
      * Usage:
-     * - Used throughout the program when retrieving employee data for tasks like sorting, searching,
-     * and displaying employee lists.
+     * - Used in the program when retrieving employee data to sort,
+     * search, and display lists of employees.
      */
     public static ArrayList<Person> people = new ArrayList<>();
-
-    /**
-     * Static list to store instances of DepartmentBase, representing all departments in memory.
-     * Purpose:
-     * - Stores department data, enabling efficient department management within the program. This
-     * includes department retrieval, adding or removing departments, and assigning employees.
-     *
-     * Usage:
-     * - Accessed by functions that handle department-specific operations, such as assigning employees
-     * to a department or generating department reports.
-     */
-    public static ArrayList<Department> departments = new ArrayList<>();
-
-
-
 }

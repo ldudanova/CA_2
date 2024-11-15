@@ -7,12 +7,21 @@ import java.util.ArrayList;
 
 
 /**
- * Class with static methods for printing different objects
+ * The Printer class contains static methods for outputting information about various objects that are contained in the application. For example, Company or Employee.
+ * <p>This class includes methods that display lists of objects and/or their data.
+ * <h2>Use Examples:</h2>
+ * <ul>
+ * <li>Display a list of the names of all existing companies in the application</li>
+ * <li>Display detailed information about each company</li>
+ * <li>Sort the list of people</li>
+ * </ul>
+ * <p>The Printer class is designed to facilitate data visualisation in the application interface.
  */
 public class Printer {
     /**
+     * Prints the names of all companies in the provided list in a numbered format.
      *
-     * @param companies
+     * @param companies list of existing companies or a message "No companies" if there's no companies to display.
      */
     public static void printCompanyNames(ArrayList<Company> companies) {
         if (companies == null || companies.isEmpty()) {
@@ -30,8 +39,10 @@ public class Printer {
     }
 
     /**
+     * Prints detailed information of all companies in the provided list in a numbered format.
      *
-     * @param companies
+     * @param companies list of existing companies
+     *                  or a message "No companies" if there's no companies to display.
      */
     public static void printCompaniesData(ArrayList<Company> companies) {
         if (companies == null || companies.isEmpty()) {
@@ -45,15 +56,17 @@ public class Printer {
         for (int i = 0; i < companies.size(); i++) {
             // Print each company’s information on a new line with a number
             // (e.g., "1) Company details here")
-            companies.get(i).print(i+1, " ");
+            companies.get(i).print(i + 1, " ");
         }
     }
 
     /**
-     * Method to print a specified number of people from the list, up to a maximum of `topN`.
+     * Prints a specified number of people from the list, up to a maximum of topN.
      *
-     * @param people List of people to print.
-     * @param topN   Number of people to print, starting from the top of the list.
+     * <p>This method displays detailed information for each person in the list.
+     *
+     * @param people a list of Person objects to be printed;
+     * @param topN   the number of entries to display.
      */
     public static void printPeople(ArrayList<Person> people, int topN) {
         // Check if the list is null or empty

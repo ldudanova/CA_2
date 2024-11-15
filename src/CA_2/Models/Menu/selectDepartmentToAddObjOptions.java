@@ -1,9 +1,5 @@
 package CA_2.Models.Menu;
 
-
-/**
- *
- */
 public enum selectDepartmentToAddObjOptions {
     EXISTING("the existing department"),
     NEW("a new department");

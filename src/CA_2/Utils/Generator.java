@@ -6,13 +6,19 @@ import CA_2.Models.Manager.ManagerType;
 
 import java.util.Random;
 
+/**
+ * Provides methods for generating data like names, emails, salaries.
+ * It supports creating random attributes
+ * and data elements needed for modeling people and companies.
+ */
 public class Generator {
 
     /**
-     * Method for getting first name form the store depending on gender
+     * Generates a random first name for a person that based on his or her gender.
+     * If an error occurs, it creates a random string.
      *
-     * @param personGender target name gender
-     * @return First name
+     * @param personGender the gender of the person
+     * @return a first name based on gender, or a random string if an error occurs
      */
     public static String getFirstName(Gender personGender) {
         try {
@@ -33,9 +39,10 @@ public class Generator {
     }
 
     /**
-     * Method for getting last name form the store
+     * Returns a random last name for a person from the list of stored people.
+     * If an error occurs, it generates a random string as a last name.
      *
-     * @return Last name
+     * @return a last name or a random set of letters on error
      */
     public static String getLastName() {
         try {
@@ -48,8 +55,10 @@ public class Generator {
     }
 
     /**
-     * @param length
-     * @return
+     * Creates a random uppercase string of a specified length.
+     *
+     * @param length the length of the string
+     * @return a random uppercase string
      */
     public static String generateUpperCaseString(int length) {
         // Amount of letters
@@ -76,11 +85,12 @@ public class Generator {
     }
 
     /**
-     * Method to generate email based on first and last names
+     * Generates an email address based on first and last names and a company name that is used for a domain.
      *
-     * @param firstName first name
-     * @param lastName  last name
-     * @return generated email
+     * @param firstName   the first name of a person
+     * @param lastName    the last name of a person
+     * @param companyName the company name
+     * @return the generated email
      */
     public static String generateEmail(String firstName, String lastName, String companyName) {
         return firstName.toLowerCase().charAt(0)   // first letter of first name
@@ -89,10 +99,11 @@ public class Generator {
     }
 
     /**
-     * Method to choose random value of any Enum
+     * Selects a random value from the specified enum type.
      *
-     * @param enumData type of enum that contains options
-     * @return Randomly selected value of Enum
+     * @param enumData the enum type
+     * @return a random enum value
+     * @param <E> the enum class
      */
     public static <E extends Enum<E>> E pickFromList(Class<E> enumData) {
         E[] enumConstants = enumData.getEnumConstants();
@@ -100,19 +111,10 @@ public class Generator {
     }
 
     /**
-     * Method to choose random item from array
+     * Generates a salary for a generated employee based on manager type.
      *
-     * @param array array of objects
-     * @param <E>   type of objects in the array
-     * @return Item from array
-     */
-    public static <E> E pickFromList(E[] array) {
-        return array[rnd.nextInt(array.length)];
-    }
-
-    /**
-     * @param managerType
-     * @return
+     * @param managerType the type of manager
+     * @return a salary in the range for the given manager type
      */
     public static double generateSalary(ManagerType managerType) {
         switch (managerType) {
@@ -138,8 +140,10 @@ public class Generator {
     }
 
     /**
-     * @param position
-     * @return
+     * Generates a salary based on employee position.
+     *
+     * @param position the employee position
+     * @return a salary in the range for the position
      */
     public static double generateSalary(EmployeePosition position) {
         switch (position) {
@@ -170,9 +174,11 @@ public class Generator {
     private static char[] letters = null;
 
     /**
-     * @param min
-     * @param max
-     * @return
+     * Generates a random double value between the specified minimum and maximum.
+     *
+     * @param min the minimum value
+     * @param max the maximum value
+     * @return a random double within the range
      */
     private static double generateRandomDouble(int min, int max) {
         double diff = (max - min) / 10.00;

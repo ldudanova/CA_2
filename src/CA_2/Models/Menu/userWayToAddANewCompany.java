@@ -1,8 +1,5 @@
 package CA_2.Models.Menu;
 
-/**
- *
- */
 public enum userWayToAddANewCompany {
     CUSTOM("Input a custom name"),
     GENERATE("Generate a company name");
