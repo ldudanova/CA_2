@@ -269,6 +269,43 @@ public class Helper {
         );
     }
 
+    public static void addOfficeEmployee(Company company) {
+        //Select department to add a new developer
+        Department selectedDepartment = getSelectedDepartmentToAddObj(company);
+
+        String employeeJobTitle = askUserForText("* Enter a job title for the office employee    (* - required)");
+
+        // Select employee position
+        EmployeePosition position = selectFromList("* Select office employee's position",
+                EmployeePosition.class);
+
+        // Input gender
+        Gender gender = selectFromList("* Select the gender: ", Gender.class);
+        // Input first name
+        String firstName = askUserForWord("* Enter office employee's first name:");
+        // Input last name
+        String lastName = askUserForWord("* Enter office employee's last name:");
+        // Input email
+        String email = askUserForEmail("Enter office employee's email:");
+        double salary = askUserForDouble("* Enter employee's salary:");
+        OfficeEmployee newOfficeEmployee = new OfficeEmployee(
+                firstName,
+                lastName,
+                email,
+                gender,
+                salary,
+                position,
+                employeeJobTitle);
+        selectedDepartment.getOfficeEmployees().add(newOfficeEmployee);
+        System.out.println(
+                "Developer \n"
+                        + newOfficeEmployee
+                        + "\n has been added to the department "
+                        + selectedDepartment.getName()
+        );
+
+    }
+
     /**
      * Method to build a Person object using data from the text file.
      * Depending on the position, it can return developer, manager, or office employee.
@@ -425,7 +462,7 @@ public class Helper {
      */
     private static Department getSelectedDepartmentToAddObj(Company company) {
         selectDepartmentToAddObjOptions choice =
-                InputUtilities.selectFromList("Would you like to add a new developer to:",
+                InputUtilities.selectFromList("Would you like to add a new employee to:",
                         selectDepartmentToAddObjOptions.class);
 
         switch (choice) {

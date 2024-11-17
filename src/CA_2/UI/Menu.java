@@ -192,6 +192,13 @@ public class Menu {
                             Helper.addDepartment(selectedCompany);
                             break;
                         }
+                        // Creating office employee
+
+
+                        case OFFICE_EMPLOYEE: {
+                            Helper.addOfficeEmployee(selectedCompany);
+                            break;
+                        }
                     }
                     break;
                 }

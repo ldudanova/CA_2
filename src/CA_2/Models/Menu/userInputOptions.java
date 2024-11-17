@@ -9,6 +9,8 @@ public enum userInputOptions {
     DEVELOPER("Developer"),
     // Option to input a Manager.
     MANAGER("Manager"),
+    // Option to input an Office Employee.
+    OFFICE_EMPLOYEE("Office Employee"),
     // Option to input a Department.
     DEPARTMENT("Department");
 
